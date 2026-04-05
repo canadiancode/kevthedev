@@ -5,6 +5,7 @@ import {
   useMotionValueEvent,
 } from 'framer-motion'
 import { useState } from 'react'
+import { HeroCloudBlobs } from '@/components/hero/HeroCloudBlobs'
 import { ScrollCanvasSequence } from '@/components/scroll/ScrollCanvasSequence'
 import { site } from '@/content/site'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
@@ -108,7 +109,10 @@ export function Hero() {
 
   return (
     <section id="top" className="hero hero--sequence" aria-labelledby="hero-title">
-      <ScrollCanvasSequence progressOut={progress}>
+      <ScrollCanvasSequence
+        progressOut={progress}
+        pinBackground={<HeroCloudBlobs />}
+      >
         <div className="hero__sequence-inner layout">
           <div className="hero__sequence-copy" aria-live="polite">
             <AnimatePresence mode="wait" initial={false}>

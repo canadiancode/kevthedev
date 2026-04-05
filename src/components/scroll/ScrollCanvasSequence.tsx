@@ -120,6 +120,8 @@ function progressToDrawState(p: number): DrawState {
 type ScrollCanvasSequenceProps = {
   /** Optional: updated on ScrollTrigger scrub (0 → 1), e.g. for Framer Motion. */
   progressOut?: MotionValue<number>
+  /** Rendered inside `.scroll-canvas-sequence__pin`, behind the split (e.g. decorative BG). */
+  pinBackground?: ReactNode
   children?: ReactNode
 }
 
@@ -129,6 +131,7 @@ type ScrollCanvasSequenceProps = {
  */
 export function ScrollCanvasSequence({
   progressOut,
+  pinBackground,
   children,
 }: ScrollCanvasSequenceProps) {
   const reduceMotion = usePrefersReducedMotion()
@@ -314,6 +317,9 @@ export function ScrollCanvasSequence({
     return (
       <div className="scroll-canvas-sequence scroll-canvas-sequence--reduced">
         <div className="scroll-canvas-sequence__pin scroll-canvas-sequence__pin--static">
+          {pinBackground ? (
+            <div className="scroll-canvas-sequence__pin-bg">{pinBackground}</div>
+          ) : null}
           <div className="scroll-canvas-sequence__split">
             <div className="scroll-canvas-sequence__copy-col scroll-canvas-sequence__copy-col--reduced">
               {children}
@@ -332,6 +338,9 @@ export function ScrollCanvasSequence({
   return (
     <div ref={trackRef} className="scroll-canvas-sequence scroll-canvas-sequence__track">
       <div ref={pinRef} className="scroll-canvas-sequence__pin">
+        {pinBackground ? (
+          <div className="scroll-canvas-sequence__pin-bg">{pinBackground}</div>
+        ) : null}
         <div className="scroll-canvas-sequence__split">
           <div className="scroll-canvas-sequence__copy-col">
             <div className="scroll-canvas-sequence__overlay">{children}</div>
