@@ -1,8 +1,22 @@
+const heroFrames = [
+  {
+    scene: 'Snowboard mountain resort',
+    lines: ['Shopify, Done Properly', 'Zero guesswork. Start to finish.'],
+  },
+  {
+    scene: 'MTB mountain resort',
+    lines: ['Themes. Hydrogen. Migrations. Apps.', 'One developer. End to end Shopify solutions.'],
+  },
+  {
+    scene: 'Mountain resort turned into website',
+    lines: ['The best rides are never accidental.', 'Neither are the best stores.'],
+  },
+];
+
 export const site = {
   hero: {
-    title: 'Your Store, Built Right.',
-    subtitle: '5+ years of Shopify. Zero guesswork.',
     cta: "Let's Talk",
+    frames: heroFrames,
   },
   about: {
     paragraphs: [

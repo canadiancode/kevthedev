@@ -7,3 +7,8 @@ dist
 !.env.example
 .DS_Store
 *.tsbuildinfo
+
+# Large source video under raw/ (folders kept via .gitkeep)
+raw/**/*.mp4
+raw/**/*.mov
+raw/**/*.webm
