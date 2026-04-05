@@ -13,6 +13,7 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-12: 3rem;
@@ -147,7 +148,7 @@ a:hover {
 @media (max-width: 460px) {
   .layout__header {
     justify-content: center;
-    
+
   }
   .layout__header .brand {
     display: none; 
@@ -501,4 +502,138 @@ a:hover {
   flex-wrap: wrap;
   gap: var(--space-4);
   justify-content: space-between;
+}
+
+/* ─── Utility ────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── About Bento ─────────────────────────────────────────────── */
+.about-bento {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "ph1 ph2 copy"
+    "ph3 ph4 copy";
+}
+
+.about-bento__tile {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  will-change: transform;
+}
+
+.about-bento__tile--ph1 { grid-area: ph1; }
+.about-bento__tile--ph2 { grid-area: ph2; }
+.about-bento__tile--ph3 { grid-area: ph3; }
+.about-bento__tile--ph4 { grid-area: ph4; }
+
+.about-bento__tile--copy {
+  grid-area: copy;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+/* Image wrapper fills the full tile height */
+.about-bento__img-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.about-bento__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(100%);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter    0.4s ease;
+}
+
+/* Image zooms inside the tile on hover (tile scale handled by framer-motion) */
+.about-bento__tile:hover .about-bento__img {
+  transform: scale(1.07);
+}
+
+/* ── Copy tile typography ── */
+.about-bento__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.about-bento__para {
+  margin: 0;
+  color: var(--color-fg-muted);
+  font-size: var(--text-base);
+  line-height: 1.7;
+}
+
+/* "I'm Kevin —" opening line */
+.about-bento__para--lead {
+  color: var(--color-fg);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* "The difference: I think like a business owner…" */
+.about-bento__para--accent {
+  color: var(--color-fg);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .about-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "ph1  ph2"
+      "ph3  ph4"
+      "copy copy";
+  }
+
+  .about-bento__tile--copy {
+    padding: var(--space-6);
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-bento {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ph1"
+      "copy"
+      "ph2"
+      "ph3"
+      "ph4";
+  }
+
+  .about-bento__img-wrap {
+    min-height: 260px;
+  }
 }
