@@ -1,4 +1,9 @@
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import {
+  useAboutPhotoParallaxOffsets,
+  type AboutPhotoArea,
+} from '@/hooks/useAboutPhotoParallaxOffsets'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { site } from '@/content/site'
 
@@ -27,19 +32,47 @@ const variants = {
 
 const delays = { ph1: 0, ph2: 0.1, ph3: 0.18, ph4: 0.26, copy: 0.12 }
 
+const photoAreas = photos.map((p) => p.area as AboutPhotoArea)
+
+/** Offset from viewport midline ÷ this → translateY(px), with scale(1.5) */
+const MID_OFFSET_PARALLAX_DIVISOR = 22
+
 export function About() {
   const reduceMotion = usePrefersReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+  const imageRefs = useRef<Record<AboutPhotoArea, HTMLImageElement | null>>({
+    ph1: null,
+    ph2: null,
+    ph3: null,
+    ph4: null,
+  })
+
+  const offsetByArea = useAboutPhotoParallaxOffsets(sectionRef, imageRefs, photoAreas)
 
   return (
-    <section id="about" className="section about" aria-labelledby="about-title">
+    <section
+      ref={sectionRef}
+      id="about"
+      className="section about"
+      aria-labelledby="about-title"
+    >
       {/* Visually hidden — keeps nav anchor + a11y tree intact */}
       <h2 id="about-title" className="sr-only">About</h2>
 
       <div className="about-bento">
         {/* ── Photo tiles ── */}
-        {photos.map(({ src, alt, area }) => {
+        {photos.map(({ src, alt, area }, index) => {
           const v = variants[area as keyof typeof variants]
           const delay = delays[area as keyof typeof delays]
+          const key = area as AboutPhotoArea
+          const midOffset = offsetByArea?.[key]
+          /** Top-left (0) & bottom-right (3) of the 2×2 photo block move opposite to the others */
+          const parallaxSign = index === 0 || index === 3 ? -1 : 1
+          const translateYPx =
+            reduceMotion || midOffset === undefined || !Number.isFinite(midOffset)
+              ? 0
+              : (midOffset / MID_OFFSET_PARALLAX_DIVISOR) * parallaxSign
+
           return (
             <motion.div
               key={area}
@@ -48,15 +81,20 @@ export function About() {
               whileInView={v.visible}
               viewport={{ once: true, margin: '-8% 0px' }}
               transition={{ duration: reduceMotion ? 0 : 0.65, delay: reduceMotion ? 0 : delay, ease }}
-              whileHover={reduceMotion ? {} : { scale: 1.025, transition: { duration: 0.3, ease } }}
             >
               <div className="about-bento__img-wrap">
                 <img
+                  ref={(el) => {
+                    imageRefs.current[key] = el
+                  }}
                   src={src}
                   alt={alt}
                   className="about-bento__img"
                   loading="lazy"
                   draggable={false}
+                  style={{
+                    transform: `scale(1.5) translateY(${translateYPx}px)`,
+                  }}
                 />
               </div>
             </motion.div>

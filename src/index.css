@@ -74,6 +74,7 @@ body {
   background: var(--color-bg);
   color: var(--color-fg);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #root {
@@ -204,93 +205,6 @@ a:hover {
 
 .hero--sequence {
   padding: 0;
-}
-
-.hero__blobs {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero__blob {
-  position: absolute;
-  color: oklch(98% 0.02 255 / 0.11);
-  filter: blur(52px);
-  transform: translate3d(0, 0, 0);
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-.hero__blob--a {
-  top: -18%;
-  left: -22%;
-  width: min(78vw, 440px);
-  height: auto;
-  animation-name: hero-blob-drift-a;
-  animation-duration: 52s;
-  animation-delay: -8s;
-}
-
-.hero__blob--b {
-  right: -28%;
-  bottom: -24%;
-  width: min(50vw, 400px);
-  height: auto;
-  animation-name: hero-blob-drift-b;
-  animation-duration: 68s;
-  animation-delay: -22s;
-}
-
-.hero__blob--c {
-  top: 8%;
-  right: -12%;
-  width: min(42vw, 340px);
-  height: auto;
-  animation-name: hero-blob-drift-c;
-  animation-duration: 44s;
-  animation-delay: -3s;
-}
-
-.scroll-canvas-sequence--reduced .hero__blob {
-  color: color-mix(in oklch, var(--color-accent) 28%, var(--color-fg) 12%);
-  filter: blur(44px);
-  opacity: 0.45;
-}
-
-@keyframes hero-blob-drift-a {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(12%, 8%, 0) scale(1.08);
-  }
-}
-
-@keyframes hero-blob-drift-b {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.02);
-  }
-  100% {
-    transform: translate3d(-10%, -12%, 0) scale(0.94);
-  }
-}
-
-@keyframes hero-blob-drift-c {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0.98);
-  }
-  100% {
-    transform: translate3d(-14%, 10%, 0) scale(1.06);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__blob {
-    animation: none;
-  }
 }
 
 .hero__sequence-inner {
@@ -531,7 +445,6 @@ a:hover {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  will-change: transform;
 }
 
 .about-bento__tile--ph1 { grid-area: ph1; }
@@ -565,14 +478,7 @@ a:hover {
   object-position: top center;
   display: block;
   filter: grayscale(100%);
-  transition:
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    filter    0.4s ease;
-}
-
-/* Image zooms inside the tile on hover (tile scale handled by framer-motion) */
-.about-bento__tile:hover .about-bento__img {
-  transform: scale(1.07);
+  transition: filter 0.4s ease;
 }
 
 /* ── Copy tile typography ── */
