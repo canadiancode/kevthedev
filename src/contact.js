@@ -1,7 +1,6 @@
 // Contact form → Web3Forms → heidemakevin@gmail.com. No server code needed.
 // The access key is public by design (it's an alias for the inbox, not a secret).
-// Get one at https://web3forms.com by entering the destination email.
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || ''
+const WEB3FORMS_KEY = '506962dd-ef70-495f-93a7-e5993274d55c'
 
 export function initContactForm(form) {
   const status = form.querySelector('.form-status')

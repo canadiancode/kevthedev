@@ -9,7 +9,7 @@ npm install
 npm run dev          # Vite dev server (no /api/contact)
 ```
 
-For the contact form locally, copy `.env.example` to `.env.local` and fill in `VITE_WEB3FORMS_KEY`.
+The contact form posts to Web3Forms; its public access key is in `src/contact.js`.
 
 ## Structure
 
@@ -29,4 +29,4 @@ and large generated media).
 ## Deploy
 
 Cloudflare Pages builds `main` automatically: build command `npm run build`, output `dist`.
-Set `VITE_WEB3FORMS_KEY` under Pages → Settings → Variables and secrets (needed at build time).
+`www.kevthedev.site` 301-redirects to `kevthedev.site` via a zone Redirect Rule.
