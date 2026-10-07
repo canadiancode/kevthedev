@@ -14,12 +14,19 @@ For the contact form locally, copy `.env.example` to `.dev.vars` and fill in `RE
 
 ## Structure
 
-- `index.html` — page content and sections
-- `src/scene/` — Three.js scene (fixed full-screen canvas)
-- `src/scroll.js` — GSAP ScrollTrigger timelines that drive the scene
+- `index.html` — page markup: film, digital terrain, and content sections
+- `src/film.js` — scroll-scrubbed opening film (WebP frame sequence on a canvas)
+- `src/digital.js` — Three.js terrain: snow → points → wireframe mountains + red route
+- `src/sections.js` — GSAP reveals, nav state, hobbies/process line animations
 - `src/contact.js` — contact form client
 - `functions/api/contact.js` — Pages Function that emails form submissions via Resend
-- `raw/` — source photos (not deployed)
+- `public/film/` — generated film frames (`lg` 16:9 desktop, `sm` 9:16 phones)
+- `public/img/` — section imagery
+- `scripts/build-film.sh` — rebuilds `public/film/` from the approved clips in `raw/video/v1`
+- `raw/film-manifest.md` — Higgsfield job IDs for every keyframe and clip
+
+`raw/reference/`, `raw/keyframes/` and `raw/video/` are git-ignored (personal photos
+and large generated media).
 
 ## Deploy
 

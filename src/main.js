@@ -1,10 +1,16 @@
 import './style.css'
-import { createScene } from './scene/scene.js'
-import { initScroll } from './scroll.js'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { initFilm } from './film.js'
+import { initDigital } from './digital.js'
+import { initSections } from './sections.js'
 import { initContactForm } from './contact.js'
+
+gsap.registerPlugin(ScrollTrigger)
 
 document.getElementById('year').textContent = new Date().getFullYear()
 
-const scene = createScene(document.getElementById('scene'))
-initScroll(scene)
+initSections()
 initContactForm(document.getElementById('contact-form'))
+initDigital()
+initFilm().then(() => ScrollTrigger.refresh())

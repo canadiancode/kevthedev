@@ -3,79 +3,283 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kevin Heidema — Shopify &amp; AI Developer | KevTheDev</title>
     <meta
       name="description"
-      content="Kevin — Shopify developer and AI automation specialist in Surrey, BC. Custom Shopify apps, Hydrogen, agentic workflows, automated social content, and AI-ready websites."
+      content="Kevin Heidema — Shopify developer and AI automation specialist in Surrey, BC. Custom Shopify apps, Hydrogen, agentic workflows, automated social content, and AI-ready websites."
     />
-    <meta name="theme-color" content="#07080c" />
+    <meta name="theme-color" content="#0b0a09" />
+    <meta property="og:title" content="Kevin Heidema — Creative Technologist" />
+    <meta property="og:description" content="Shopify / AI / Custom Solutions. Built in BC." />
+    <meta property="og:image" content="https://kevthedev.site/img/og.jpg" />
+    <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Kevin — Shopify Developer | KevTheDev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=Caveat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="/film/lg/0001.webp" media="(min-aspect-ratio: 1/1)" />
+    <link rel="preload" as="image" href="/film/sm/0001.webp" media="(max-aspect-ratio: 1/1)" />
   </head>
   <body>
-    <canvas id="scene" aria-hidden="true"></canvas>
+    <header class="nav" id="nav">
+      <a class="nav-logo" href="#top" aria-label="KevTheDev home">K</a>
+      <nav class="nav-links" id="nav-links" aria-label="Sections">
+        <a href="#top"><span>01</span>Home</a>
+        <a href="#about"><span>02</span>About</a>
+        <a href="#services"><span>03</span>Services</a>
+        <a href="#work"><span>04</span>Work</a>
+        <a href="#hobbies"><span>05</span>Hobbies</a>
+        <a href="#process"><span>06</span>Process</a>
+        <a href="#contact"><span>07</span>Contact</a>
+      </nav>
+      <a class="pill" href="#contact">Let's talk <i>→</i></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </header>
 
-    <main id="content">
-      <section class="panel hero" id="top">
-        <p class="eyebrow">KevTheDev · Surrey, BC</p>
-        <h1>Your Store, Built Right.</h1>
-        <p class="lede">5+ years of Shopify. Now building the AI that runs alongside it.</p>
-        <a class="button" href="#contact">Let's Talk →</a>
+    <main>
+      <!-- 01 — Opening film: scroll scrubs an image sequence -->
+      <section class="film" id="top" aria-label="Intro">
+        <div class="film-stage">
+          <picture class="film-poster">
+            <source media="(max-aspect-ratio: 1/1)" srcset="/film/sm/0001.webp" />
+            <img src="/film/lg/0001.webp" alt="" fetchpriority="high" />
+          </picture>
+          <canvas class="film-canvas" id="film-canvas" aria-hidden="true"></canvas>
+          <div class="film-shade"></div>
+
+          <div class="route" aria-hidden="true">
+            <svg viewBox="0 0 2 100" preserveAspectRatio="none"><line class="route-track" x1="1" y1="0" x2="1" y2="100" /><line class="route-fill" id="route-fill" x1="1" y1="0" x2="1" y2="100" pathLength="1" /></svg>
+            <ol>
+              <li data-at="0">Garage</li>
+              <li data-at="0.222">Trail</li>
+              <li data-at="0.491">Forest</li>
+              <li data-at="0.733">Summit</li>
+            </ol>
+          </div>
+
+          <div class="chapter chapter-hero" data-from="0" data-to="0.16">
+            <h1>Creative<br />technologist<br />for <em>modern</em><br />brands.</h1>
+            <p class="kicker">Shopify / AI / Custom solutions</p>
+            <div class="chapter-actions">
+              <a class="pill" href="#work">View work <i>→</i></a>
+              <a class="pill ghost" href="#contact">Let's talk</a>
+            </div>
+            <aside class="hud hud-a" aria-hidden="true">
+              <h4>Shopify stores</h4>
+              <ul><li>Design</li><li>Build</li><li>Optimize</li><li>Scale</li></ul>
+            </aside>
+            <aside class="hud hud-b" aria-hidden="true">
+              <h4>AI workflows</h4>
+              <ul><li>Automate</li><li>Integrate</li><li>Analyze</li><li>Grow</li></ul>
+              <svg viewBox="0 0 120 40"><polyline points="0,36 18,30 30,33 46,22 58,26 74,14 88,18 104,6 120,2" /></svg>
+            </aside>
+          </div>
+
+          <div class="chapter" data-from="0.25" data-to="0.47">
+            <p class="eyebrow"><b>01</b> Shopify</p>
+            <h2>Stores built<br />to <em>perform.</em></h2>
+            <p>Themes, Hydrogen storefronts, custom Shopify apps and migrations — fast, clean and built to convert.</p>
+          </div>
+
+          <div class="chapter" data-from="0.52" data-to="0.71">
+            <p class="eyebrow"><b>02</b> AI automation</p>
+            <h2>Workflows that<br /><em>do the work.</em></h2>
+            <p>Agentic workflows and automated content engines that take the repetitive work off your team's plate.</p>
+          </div>
+
+          <div class="chapter" data-from="0.76" data-to="0.95">
+            <p class="eyebrow"><b>03</b> Custom systems</p>
+            <h2>Built for where<br />you're <em>going.</em></h2>
+            <p>AI-ready websites, WebMCP and custom tooling — so agents and people can both find, use and recommend you.</p>
+          </div>
+
+          <div class="film-ui">
+            <p class="scroll-hint" id="scroll-hint"><span></span>Scroll to explore</p>
+            <a class="skip" href="#about">Skip intro ↓</a>
+          </div>
+          <div class="film-loader" id="film-loader" aria-hidden="true"><i></i></div>
+        </div>
       </section>
 
-      <section class="panel" id="about">
-        <h2>About</h2>
-        <p>I'm Kevin — a Shopify developer based in Surrey, BC. I work across the full stack, from theme builds to custom Hydrogen storefronts.</p>
-        <p>Lately that work has moved into AI: agentic workflows that take busywork off a team's plate, content engines that keep social channels fed, and sites built to be understood by AI agents as well as people.</p>
-        <p>The difference: I think like a business owner, not just a developer. I care what converts, not just what ships.</p>
-        <p>Off the screen I'm on a mountain bike or chasing powder somewhere in BC. Same focus, different terrain.</p>
+      <!-- Snow becomes data: Three.js terrain -->
+      <section class="digital" id="digital" aria-label="Shopify, AI and custom systems">
+        <div class="digital-stage">
+          <canvas id="digital-canvas" aria-hidden="true"></canvas>
+          <div class="digital-flash" id="digital-flash"></div>
+          <div class="digital-intro" id="digital-intro">
+            <p class="eyebrow">Same terrain</p>
+            <h2>Different <em>ideas.</em></h2>
+          </div>
+          <div class="peak-labels">
+            <div class="peak-label" data-peak="0"><b>Shopify</b><span>Stores · Hydrogen · Apps</span></div>
+            <div class="peak-label" data-peak="1"><b>AI</b><span>Agents · Automation · Content</span></div>
+            <div class="peak-label" data-peak="2"><b>Custom systems</b><span>Integrations · WebMCP · Tooling</span></div>
+          </div>
+        </div>
       </section>
 
-      <section class="panel" id="services">
-        <h2>Shopify. Start to finish.</h2>
-        <ul class="cards">
-          <li><h3>Store Setup</h3><p>Done right from day one. No bad foundations to unpick later.</p></li>
-          <li><h3>Speed &amp; Performance</h3><p>Slow stores lose sales. I find the bottleneck and fix it.</p></li>
-          <li><h3>Hydrogen / Headless</h3><p>Custom storefronts for brands that need more than Shopify's defaults.</p></li>
-          <li><h3>Custom Shopify Apps</h3><p>Purpose-built apps on Shopify's APIs for when nothing in the App Store fits how you actually work.</p></li>
-          <li><h3>App Integration</h3><p>Third-party tools, CRMs, fulfillment systems — connected and working.</p></li>
-          <li><h3>Migration to Shopify</h3><p>From WooCommerce, Squarespace, or anywhere else. Clean and complete.</p></li>
-          <li><h3>Maintenance &amp; Support</h3><p>Ongoing support so your store stays fast, updated, and live.</p></li>
-        </ul>
-
-        <h2 class="group-title">AI that does the work.</h2>
-        <ul class="cards">
-          <li><h3>AI Automation &amp; Agentic Workflows</h3><p>Agents that handle the repetitive work — ops, support triage, reporting — wired into the tools you already use.</p></li>
-          <li><h3>Social Content Engine</h3><p>An automated pipeline that generates, schedules, and posts on-brand content. Consistent output without the content treadmill.</p></li>
-          <li><h3>AI-Ready Websites</h3><p>WebMCP, structured data, and llms.txt so AI agents and assistants can understand your site, use it, and recommend it.</p></li>
-        </ul>
+      <section class="section about" id="about">
+        <picture class="section-bg">
+          <source media="(max-width: 760px)" srcset="/img/about-sm.webp" />
+          <img src="/img/about.webp" alt="" loading="lazy" />
+        </picture>
+        <div class="section-side">
+          <p class="num">02</p>
+          <p class="label">About</p>
+          <ul><li>My story</li><li>Skills</li><li>Tools</li><li>Philosophy</li></ul>
+        </div>
+        <div class="section-body reveal">
+          <h2>Builder.<br />Rider.<br /><em>Problem solver.</em></h2>
+          <p>I'm Kevin — a Shopify developer based in Surrey, BC. I work across the full stack, from theme builds to custom Hydrogen storefronts, and lately the AI that runs alongside them: agentic workflows, content engines, and sites built to be understood by AI agents as well as people.</p>
+          <p>The difference: I think like a business owner, not just a developer. I care what converts, not just what ships. Off the screen I'm on a dirt bike, a mountain bike or chasing powder somewhere in BC. Same focus, different terrain.</p>
+          <a class="pill" href="#contact">Work with me <i>→</i></a>
+        </div>
+        <p class="script">Same terrain.<br />Different ideas.<br /><span>— K</span></p>
       </section>
 
-      <section class="panel" id="work">
-        <h2>Real Stores. Real Results.</h2>
-        <article class="case">
-          <p class="eyebrow">Featured build</p>
-          <h3>Tuner Depot</h3>
-          <p>Shopify storefront for diesel performance parts and custom tunes.</p>
-          <a class="button ghost" href="https://tunerdepot.com" target="_blank" rel="noopener">Visit tunerdepot.com ↗</a>
-        </article>
+      <section class="section services" id="services">
+        <div class="section-side">
+          <p class="num">03</p>
+          <p class="label">Services</p>
+          <ul><li>Shopify</li><li>AI automation</li><li>Custom solutions</li><li>Support</li></ul>
+        </div>
+        <div class="section-body">
+          <div class="reveal">
+            <h2>Ideas.<br />Systems.<br /><em>Freedom.</em></h2>
+            <p>From high-converting Shopify stores to custom AI workflows, I help brands work smarter, move faster, and grow bigger.</p>
+          </div>
+          <div class="cards">
+            <article class="card reveal">
+              <h3><i>◆</i>Shopify development</h3>
+              <ul>
+                <li><b>Store setup</b> Done right from day one. No bad foundations to unpick later.</li>
+                <li><b>Hydrogen / headless</b> Custom storefronts for brands that need more than the defaults.</li>
+                <li><b>Custom Shopify apps</b> Purpose-built on Shopify's APIs when nothing in the App Store fits.</li>
+                <li><b>Speed &amp; performance</b> Slow stores lose sales. I find the bottleneck and fix it.</li>
+                <li><b>Migration to Shopify</b> From WooCommerce, Squarespace or anywhere else. Clean and complete.</li>
+              </ul>
+            </article>
+            <article class="card reveal">
+              <h3><i>◆</i>AI solutions</h3>
+              <ul>
+                <li><b>AI automation &amp; agentic workflows</b> Agents that handle repetitive work, wired into the tools you already use.</li>
+                <li><b>Social content engine</b> An automated pipeline that generates, schedules and posts on-brand content.</li>
+                <li><b>AI-ready websites</b> WebMCP, structured data and llms.txt so AI agents can understand, use and recommend your site.</li>
+              </ul>
+            </article>
+            <article class="card reveal">
+              <h3><i>◆</i>Integrations &amp; support</h3>
+              <ul>
+                <li><b>App integration</b> Third-party tools, CRMs, fulfillment systems — connected and working.</li>
+                <li><b>Maintenance &amp; support</b> Ongoing support so your store stays fast, updated and live.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
       </section>
 
-      <section class="panel" id="contact">
-        <h2>Let's Build Something.</h2>
-        <p>Got a project? Send me a message. I reply within one business day.</p>
-        <form id="contact-form" novalidate>
-          <label>Name<input name="name" autocomplete="name" maxlength="100" required /></label>
-          <label>Email<input name="email" type="email" autocomplete="email" maxlength="200" required /></label>
-          <label>Message<textarea name="message" rows="5" maxlength="5000" required></textarea></label>
-          <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off" /></label>
-          <button class="button" type="submit">Send message</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
-        <p class="note">No sales calls. No fluff. Just a straight conversation.</p>
+      <section class="section work" id="work">
+        <div class="section-side">
+          <p class="num">04</p>
+          <p class="label">Featured work</p>
+        </div>
+        <div class="section-body">
+          <h2 class="reveal">Real stores.<br /><em>Real results.</em></h2>
+          <div class="work-grid">
+            <a class="work-card reveal" href="https://tunerdepot.com" target="_blank" rel="noopener">
+              <div class="work-shot"><img src="/img/work-tunerdepot.webp" alt="Tuner Depot storefront homepage" loading="lazy" /></div>
+              <div class="work-meta">
+                <p class="eyebrow"><b>01</b> E-commerce</p>
+                <h3>Tuner Depot</h3>
+                <p>Shopify storefront for diesel performance parts and custom tunes.</p>
+                <ul class="tags"><li>Shopify</li><li>E-commerce</li><li>Development</li></ul>
+                <span class="link">Visit tunerdepot.com ↗</span>
+              </div>
+            </a>
+            <div class="work-card work-nda reveal">
+              <p class="eyebrow"><b>+</b> More work</p>
+              <h3>Under NDA</h3>
+              <p>Most of what I build — custom apps, AI workflows, internal tools — lives behind client walls. Happy to walk you through relevant projects on a call.</p>
+              <a class="pill ghost" href="#contact">Ask about it <i>→</i></a>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <footer>Built in BC. Shopify &amp; AI. © <span id="year">2026</span> kevthedev</footer>
+      <section class="section hobbies" id="hobbies">
+        <div class="section-side">
+          <p class="num">05</p>
+          <p class="label">Hobbies</p>
+          <ul><li>Cars</li><li>Motorcycles</li><li>Mountain biking</li><li>Snowboarding</li></ul>
+        </div>
+        <div class="hobby-strip">
+          <figure class="hobby"><img src="/img/hobby-cars-sm.webp" srcset="/img/hobby-cars-sm.webp 800w, /img/hobby-cars.webp 1600w" sizes="(max-width: 760px) 100vw, 30vw" alt="Black lowered Toyota Mark II Blit in a dark garage" loading="lazy" /><figcaption><b>JDM cars</b>Tunes, builds and late-night drives.</figcaption></figure>
+          <figure class="hobby"><img src="/img/hobby-moto-sm.webp" srcset="/img/hobby-moto-sm.webp 800w, /img/hobby-moto.webp 1600w" sizes="(max-width: 760px) 100vw, 30vw" alt="Red dual-sport motorcycle on a forest trail" loading="lazy" /><figcaption><b>Dual sport</b>Explore further. Find new roads.</figcaption></figure>
+          <figure class="hobby"><img src="/img/hobby-mtb-sm.webp" srcset="/img/hobby-mtb-sm.webp 800w, /img/hobby-mtb.webp 1600w" sizes="(max-width: 760px) 100vw, 30vw" alt="Mountain biker in a red helmet on a rainforest trail" loading="lazy" /><figcaption><b>Mountain biking</b>Trails, elevation and good times.</figcaption></figure>
+          <figure class="hobby"><img src="/img/hobby-snow-sm.webp" srcset="/img/hobby-snow-sm.webp 800w, /img/hobby-snow.webp 1600w" sizes="(max-width: 760px) 100vw, 30vw" alt="Snowboarder carving powder in the BC mountains" loading="lazy" /><figcaption><b>Snowboarding</b>Different season. Same freedom.</figcaption></figure>
+          <svg class="elevation" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+            <path id="elevation-path" d="M0,92 C60,88 90,70 140,78 S230,104 290,86 S380,40 430,58 S520,96 580,74 S650,20 700,30 S770,92 830,70 S900,8 940,14 S985,40 1000,36" pathLength="1" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="section process" id="process">
+        <picture class="section-bg">
+          <source media="(max-width: 760px)" srcset="/img/process-sm.webp" />
+          <img src="/img/process.webp" alt="" loading="lazy" />
+        </picture>
+        <div class="section-side">
+          <p class="num">06</p>
+          <p class="label">Process</p>
+        </div>
+        <div class="section-body">
+          <h2 class="reveal">A simple process<br />for <em>big results.</em></h2>
+          <ol class="steps">
+            <li class="reveal"><span>01</span><b>Discovery</b>Understand your goals, brand and audience.</li>
+            <li class="reveal"><span>02</span><b>Plan</b>Strategy, structure and technical approach.</li>
+            <li class="reveal"><span>03</span><b>Build</b>Design, develop and integrate.</li>
+            <li class="reveal"><span>04</span><b>Launch</b>Test, refine and go live.</li>
+            <li class="reveal"><span>05</span><b>Iterate</b>Optimize, automate and scale.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <picture class="section-bg">
+          <source media="(max-width: 760px)" srcset="/img/contact-sm.webp" />
+          <img src="/img/contact.webp" alt="" loading="lazy" />
+        </picture>
+        <div class="section-side">
+          <p class="num">07</p>
+          <p class="label">Contact</p>
+          <ul><li>Let's work together</li></ul>
+        </div>
+        <div class="section-body reveal">
+          <h2>Have a project<br /><em>in mind?</em></h2>
+          <p>Let's build something great — whether it's a Shopify store, an AI solution, or just a conversation about bikes and tech. I reply within one business day.</p>
+          <form id="contact-form" class="form" novalidate>
+            <label>Name<input name="name" autocomplete="name" maxlength="100" required /></label>
+            <label>Email<input name="email" type="email" autocomplete="email" maxlength="200" required /></label>
+            <label class="wide">Message<textarea name="message" rows="4" maxlength="5000" required></textarea></label>
+            <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off" /></label>
+            <button class="pill" type="submit">Get in touch <i>→</i></button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <p class="script">Ideas. Adventures.<br />Better brands.<br /><span>— K</span></p>
+      </section>
     </main>
+
+    <footer class="footer">
+      <a class="nav-logo" href="#top" aria-label="Back to top">K</a>
+      <p>Built in BC. Shopify &amp; AI. © <span id="year">2026</span> KevTheDev</p>
+      <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+    </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>
