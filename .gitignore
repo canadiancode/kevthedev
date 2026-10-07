@@ -14,3 +14,8 @@ raw/**/*.mov
 raw/**/*.webm
 .dev.vars
 .claude/worktrees
+
+# Generated keyframes/video (large; source of truth is Higgsfield)
+raw/keyframes/
+raw/video/
+raw/reference/
