@@ -113,3 +113,5 @@ footer {
   color: var(--muted);
   font-size: 0.85rem;
 }
+
+.group-title { margin-top: 1.6em; }
