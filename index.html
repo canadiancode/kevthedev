@@ -2,22 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
-      rel="stylesheet"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Kevin — Shopify developer in Surrey, BC. Store setup, performance, Hydrogen, integrations, migrations, and ongoing support."
     />
+    <meta name="theme-color" content="#07080c" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Kevin — Shopify Developer | KevTheDev</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <main id="content">
+      <section class="panel hero" id="top">
+        <p class="eyebrow">KevTheDev · Surrey, BC</p>
+        <h1>Your Store, Built Right.</h1>
+        <p class="lede">5+ years of Shopify. Zero guesswork.</p>
+        <a class="button" href="#contact">Let's Talk →</a>
+      </section>
+
+      <section class="panel" id="about">
+        <h2>About</h2>
+        <p>I'm Kevin — a Shopify developer based in Surrey, BC. I work across the full stack, from theme builds to custom Hydrogen storefronts.</p>
+        <p>The difference: I think like a business owner, not just a developer. I care what converts, not just what ships.</p>
+        <p>Off the screen I'm on a mountain bike or chasing powder somewhere in BC. Same focus, different terrain.</p>
+      </section>
+
+      <section class="panel" id="services">
+        <h2>Shopify. Start to finish.</h2>
+        <ul class="cards">
+          <li><h3>Store Setup</h3><p>Done right from day one. No bad foundations to unpick later.</p></li>
+          <li><h3>Speed &amp; Performance</h3><p>Slow stores lose sales. I find the bottleneck and fix it.</p></li>
+          <li><h3>Hydrogen / Headless</h3><p>Custom storefronts for brands that need more than Shopify's defaults.</p></li>
+          <li><h3>App Integration</h3><p>Third-party tools, CRMs, fulfillment systems — connected and working.</p></li>
+          <li><h3>Migration to Shopify</h3><p>From WooCommerce, Squarespace, or anywhere else. Clean and complete.</p></li>
+          <li><h3>Maintenance &amp; Support</h3><p>Ongoing support so your store stays fast, updated, and live.</p></li>
+        </ul>
+      </section>
+
+      <section class="panel" id="work">
+        <h2>Real Stores. Real Results.</h2>
+        <article class="case">
+          <p class="eyebrow">Featured build</p>
+          <h3>Tuner Depot</h3>
+          <p>Shopify storefront for diesel performance parts and custom tunes.</p>
+          <a class="button ghost" href="https://tunerdepot.com" target="_blank" rel="noopener">Visit tunerdepot.com ↗</a>
+        </article>
+      </section>
+
+      <section class="panel" id="contact">
+        <h2>Let's Build Something.</h2>
+        <p>Got a project? Send me a message. I reply within one business day.</p>
+        <form id="contact-form" novalidate>
+          <label>Name<input name="name" autocomplete="name" maxlength="100" required /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" maxlength="200" required /></label>
+          <label>Message<textarea name="message" rows="5" maxlength="5000" required></textarea></label>
+          <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off" /></label>
+          <button class="button" type="submit">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="note">No sales calls. No fluff. Just a straight conversation.</p>
+      </section>
+
+      <footer>Built in BC. Focused on Shopify. © <span id="year">2026</span> kevthedev</footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -12,3 +12,5 @@ dist
 raw/**/*.mp4
 raw/**/*.mov
 raw/**/*.webm
+.dev.vars
+.claude/worktrees
