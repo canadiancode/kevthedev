@@ -18,6 +18,8 @@ export async function initFilm() {
   const routeStops = [...document.querySelectorAll('.route li')]
   const chapters = [...section.querySelectorAll('.chapter')]
   const hint = document.getElementById('scroll-hint')
+  const endFade = [document.getElementById('film-shade'), document.getElementById('route'), document.getElementById('film-ui')]
+  const handoff = document.getElementById('digital-from')
 
   const meta = await fetch('/film/meta.json').then((r) => r.json())
   const total = meta.frames
@@ -29,6 +31,9 @@ export async function initFilm() {
   let drawn = -1
 
   const src = (i) => `/film/${set}/${String(i + 1).padStart(4, '0')}.webp`
+  // The terrain section opens on the film's final frame so the cut is seamless.
+  const setHandoff = () => (handoff.src = src(total - 1))
+  setHandoff()
 
   function loadFrame(i, forSet) {
     return new Promise((resolve) => {
@@ -103,6 +108,9 @@ export async function initFilm() {
     routeFill.style.strokeDashoffset = 1 - p
     routeStops.forEach((li) => li.classList.toggle('passed', p >= Number(li.dataset.at)))
     hint.style.opacity = Math.max(0, 1 - p * 30)
+    // Clear the shading and UI over the last frames so the final frame is clean.
+    const clean = 1 - clamp((p - 0.955) / 0.04)
+    endFade.forEach((el) => (el.style.opacity = clean))
 
     const fade = 0.035
     chapters.forEach((el, idx) => {
@@ -136,6 +144,7 @@ export async function initFilm() {
 
   portrait.addEventListener('change', () => {
     set = portrait.matches ? 'sm' : 'lg'
+    setHandoff()
     frames = new Array(total)
     loaded = 0
     loader.classList.remove('done')

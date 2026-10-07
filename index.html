@@ -50,9 +50,9 @@
             <img src="/film/lg/0001.webp" alt="" fetchpriority="high" />
           </picture>
           <canvas class="film-canvas" id="film-canvas" aria-hidden="true"></canvas>
-          <div class="film-shade"></div>
+          <div class="film-shade" id="film-shade"></div>
 
-          <div class="route" aria-hidden="true">
+          <div class="route" id="route" aria-hidden="true">
             <svg viewBox="0 0 2 100" preserveAspectRatio="none"><line class="route-track" x1="1" y1="0" x2="1" y2="100" /><line class="route-fill" id="route-fill" x1="1" y1="0" x2="1" y2="100" pathLength="1" /></svg>
             <ol>
               <li data-at="0">Garage</li>
@@ -98,7 +98,7 @@
             <p>AI-ready websites, WebMCP and custom tooling — so agents and people can both find, use and recommend you.</p>
           </div>
 
-          <div class="film-ui">
+          <div class="film-ui" id="film-ui">
             <p class="scroll-hint" id="scroll-hint"><span></span>Scroll to explore</p>
             <a class="skip" href="#about">Skip intro ↓</a>
           </div>
@@ -111,6 +111,7 @@
         <div class="digital-stage">
           <canvas id="digital-canvas" aria-hidden="true"></canvas>
           <div class="digital-flash" id="digital-flash"></div>
+          <img class="digital-from" id="digital-from" alt="" decoding="async" />
           <div class="digital-intro" id="digital-intro">
             <p class="eyebrow">Same terrain</p>
             <h2>Different <em>ideas.</em></h2>

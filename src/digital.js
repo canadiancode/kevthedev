@@ -55,6 +55,7 @@ export function initDigital() {
   const section = document.getElementById('digital')
   const canvas = document.getElementById('digital-canvas')
   const flash = document.getElementById('digital-flash')
+  const from = document.getElementById('digital-from')
   const intro = document.getElementById('digital-intro')
   const labels = [...section.querySelectorAll('.peak-label')]
   const mobile = matchMedia('(max-width: 760px)').matches
@@ -187,6 +188,15 @@ export function initDigital() {
       else renderer.setAnimationLoop(null)
     },
   })
+  // The section overlaps the film's last screen; only show it once it has
+  // locked into place, exactly where the film stage lets go.
+  const stage = section.querySelector('.digital-stage')
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: 'bottom top',
+    onToggle: (self) => stage.classList.toggle('live', self.isActive),
+  })
   ScrollTrigger.create({
     trigger: section,
     start: 'top top',
@@ -209,11 +219,12 @@ export function initDigital() {
     const t = clock.getElapsedTime()
     const p = progress
 
-    flash.style.opacity = 1 - smooth(0, 0.12, p)
-    intro.style.opacity = smooth(0.06, 0.14, p) * (1 - smooth(0.26, 0.34, p))
+    from.style.opacity = 1 - smooth(0.01, 0.07, p)
+    flash.style.opacity = 1 - smooth(0.07, 0.17, p)
+    intro.style.opacity = smooth(0.14, 0.2, p) * (1 - smooth(0.3, 0.38, p))
 
     pointsMat.uniforms.uTime.value = t
-    pointsMat.uniforms.uMorph.value = smooth(0.08, 0.42, p)
+    pointsMat.uniforms.uMorph.value = smooth(0.12, 0.44, p)
     pointsMat.uniforms.uWarm.value = smooth(0.35, 0.6, p) * 0.6
     wireMat.opacity = smooth(0.3, 0.55, p) * 0.28
 
