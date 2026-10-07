@@ -31,3 +31,25 @@ Higgsfield job IDs for the scroll-driven opening film. Generated files live in
 Notes: minimax_h3 can't combine start/end frames with extra reference images, so
 its clips rely on the prompt for subject detail; flux_3_video gets the mid-scene
 stills as references too.
+
+## Round 1 review notes (2026-10-07)
+
+- **flux_3_video treats `image_references` as storyboard frames** — clip 03 (`bb19dc2f`)
+  literally cut to the real bike-wall photo at 8.0–10.8s. Only pass generated,
+  in-scene stills as FLUX references, never real photos.
+- 01 FLUX (`f7fb4d55`): lovely, but holds static 0–6.5s then hard-cuts to the headlight.
+- 03 FLUX (`bb19dc2f`): 0–7.8s excellent (red wipe → chase → jump over valley); unusable after.
+- 04 FLUX (`d93e0c9d`): good; quick sky→ridge morph at ~1.5s, angle jump at ~7s.
+- Re-runs with in-scene references only: 02 FLUX `cc69126d` (original, real photo ref),
+  `3a87d7ab` (failed, no reason), `77f68170` (retry, no brand names); 03 FLUX `a72024d3`.
+
+## Round 1 picks → `raw/video/film-preview-v1.mp4` (~45.5s, 1080p)
+
+| Clip | Pick | Why | Runner-up |
+|---|---|---|---|
+| 01 garage | minimax `65984346` | continuous push-in wide → hood → headlight ignites → bloom | minimax `6a8d099a` (also continuous); FLUX `f7fb4d55` hard-cuts at 6.5s |
+| 02 crf-trail | minimax `863f6b35` | headlight glow → canopy → CRF approaches → red bodywork fills lens; CRF very accurate | minimax `99200041` hard-cuts at 6.2s and doesn't end on red |
+| 03 mtb-trail | FLUX `a72024d3` | starts on the exact red wipe, accurate gear + Enduro, epic launch over valley; hard cut to clouds at ~11.2s hidden with a 0.4s crossfade | minimax `e0282b4b` (no cuts, lake-valley reveal, but generic gear and a ~4s static sky tail) |
+| 04 snowboard | minimax `0bcbfb95` | one unbroken move: clouds → ridge → drop-in → carves → powder wall | FLUX `d93e0c9d` (angle jump ~7s); minimax `423c5f87` (odd seated pose, cut ~6s) |
+
+minimax_h3 holds continuous camera moves much better; FLUX gives better subject fidelity.
