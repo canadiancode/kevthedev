@@ -397,6 +397,23 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 .about { min-height: 92vh; align-items: center; }
 .about .section-body { max-width: 640px; }
 .about .pill { margin-top: 12px; }
+.portrait { display: flex; align-items: flex-end; gap: 18px; margin: 0 0 36px; }
+.portrait img {
+  width: 132px;
+  height: 160px;
+  object-fit: cover;
+  object-position: 50% 10%;
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  border-bottom: 2px solid var(--red);
+}
+.portrait figcaption {
+  padding-bottom: 6px;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.portrait figcaption b { display: block; margin-bottom: 4px; font: 800 1.05rem/1.1 var(--display); letter-spacing: 0; color: var(--fg); }
 
 .cards {
   display: grid;
@@ -426,7 +443,7 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 .card li { font-size: 0.9rem; color: rgb(241 236 229 / 0.78); line-height: 1.5; }
 .card li b { display: block; color: var(--fg); font-weight: 600; margin-bottom: 2px; }
 
-.work-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-top: 40px; }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
 .work-card {
   display: flex;
   flex-direction: column;
@@ -446,9 +463,19 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 18px; list-style: none; }
 .tags li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.68rem; color: var(--muted); }
 .link { font-size: 0.8rem; color: var(--copper); }
-.work-nda { padding: 28px; justify-content: flex-end; background: radial-gradient(120% 80% at 100% 0%, rgb(229 50 45 / 0.12), transparent 60%), var(--bg-2); }
+.work-nda {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 28px;
+  background: radial-gradient(120% 160% at 100% 0%, rgb(229 50 45 / 0.12), transparent 60%), var(--bg-2);
+}
+.work-nda > div { max-width: 640px; }
 .work-nda h3 { font-size: 1.6rem; }
-.work-nda .pill { align-self: flex-start; margin-top: 8px; }
+.work-nda p:last-child { margin-bottom: 0; }
+.work-nda .pill { flex: none; }
 
 .hobbies { grid-template-columns: minmax(130px, 1fr) 5fr; padding-bottom: clamp(60px, 8vw, 110px); }
 .hobby-strip {
@@ -665,6 +692,7 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
   }
   .script { position: relative; right: auto; bottom: auto; justify-self: end; margin-top: 12px; font-size: 1.3rem; }
   .work-grid { grid-template-columns: 1fr; }
+  .work-nda { flex-direction: column; align-items: flex-start; gap: 16px; }
   .hobby-strip {
     grid-template-columns: 1fr;
     height: auto;

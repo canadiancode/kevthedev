@@ -2,6 +2,26 @@
 // The access key is public by design (it's an alias for the inbox, not a secret).
 const WEB3FORMS_KEY = '506962dd-ef70-495f-93a7-e5993274d55c'
 
+// Shared by the form and the WebMCP contact tool.
+export async function sendMessage({ name, email, message }) {
+  if (!WEB3FORMS_KEY) throw new Error('Contact form is not configured yet.')
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: `New message from ${name} via kevthedev.site`,
+      from_name: 'kevthedev.site',
+      name,
+      email,
+      replyto: email,
+      message,
+    }),
+  })
+  const json = await res.json().catch(() => ({}))
+  if (!res.ok || !json.success) throw new Error(json.message || 'Could not send your message. Please try again.')
+}
+
 export function initContactForm(form) {
   const status = form.querySelector('.form-status')
   const button = form.querySelector('button[type="submit"]')
@@ -17,31 +37,11 @@ export function initContactForm(form) {
     // Honeypot: real visitors never fill this hidden field.
     if (data.company) return
 
-    if (!WEB3FORMS_KEY) {
-      setStatus('Contact form is not configured yet.', 'error')
-      return
-    }
-
     button.disabled = true
     setStatus('Sending…', '')
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `New message from ${data.name} via kevthedev.site`,
-          from_name: 'kevthedev.site',
-          name: data.name,
-          email: data.email,
-          replyto: data.email,
-          message: data.message,
-        }),
-      })
-      const json = await res.json().catch(() => ({}))
-      if (!res.ok || !json.success) throw new Error(json.message || 'Could not send your message. Please try again.')
-
+      await sendMessage(data)
       form.reset()
       setStatus("Thanks — your message is on its way. I'll reply within one business day.", 'ok')
     } catch (err) {
