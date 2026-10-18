@@ -39,6 +39,37 @@ export function initSections() {
     scrollTrigger: { trigger: '.hobby-strip', start: 'top 75%', end: 'bottom 75%', scrub: 0.4 },
   })
 
+  // Hobby clips: on hover devices, each panel plays its clip from the start
+  // while hovered. Phones keep the stills (no hover, and it saves data).
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const videos = gsap.utils.toArray('.hobby[data-video]').map((fig) => {
+      const video = document.createElement('video')
+      video.muted = true
+      video.loop = true
+      video.playsInline = true
+      video.preload = 'none'
+      video.setAttribute('aria-hidden', 'true')
+      video.src = fig.dataset.video
+      fig.querySelector('img').after(video)
+      fig.addEventListener('mouseenter', () => {
+        video.currentTime = 0
+        video.play().then(() => fig.matches(':hover') && fig.classList.add('playing'), () => {})
+      })
+      fig.addEventListener('mouseleave', () => {
+        fig.classList.remove('playing')
+        video.pause()
+      })
+      return video
+    })
+    // Start buffering once the strip is close, so the first hover is instant.
+    ScrollTrigger.create({
+      trigger: '.hobby-strip',
+      start: 'top 200%',
+      once: true,
+      onEnter: () => videos.forEach((v) => { v.preload = 'auto'; v.load() }),
+    })
+  }
+
   // Process: red timeline fills as you scroll through the steps.
   gsap.fromTo('.steps', { '--fill': 0 }, {
     '--fill': 1,
