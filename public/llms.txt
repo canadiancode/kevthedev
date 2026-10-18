@@ -14,7 +14,7 @@ The site is a single page at https://kevthedev.site/. It exposes WebMCP tools (`
 
 - [Tuner Depot](https://tunerdepot.com): Shopify storefront for diesel performance parts and custom tunes
 - [Binxie Bot](https://binxiebot.com): Shopify store for battery-free, screen-free tech kits, games and puzzle books that pair with free Binxie video lessons
-- [Minpaku](https://minpaku.ca): custom booking site for a Japanese-style homestay in Coquitlam, BC, with a live CAD/JPY cost estimator
+- [Minpaku](https://minpaku.ca): bilingual (English/Japanese) booking site for a Japanese-style homestay in Coquitlam, BC, with a 3D Tokyo-to-Vancouver flyover and a live CAD/JPY trip estimator
 - Most other work (custom apps, AI workflows, internal tools) is under NDA
 
 ## Process
