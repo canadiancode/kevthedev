@@ -49,6 +49,9 @@ function height(x, z) {
 // Camera z along the flight for a given scroll progress.
 const cameraZ = (p) => 8 - smooth(0.12, 1, p) * 30
 
+// How far ahead of the camera the route's red dot travels.
+const ROUTE_LEAD = 6
+
 const LABEL_AT = [0.5, 0.6, 0.7]
 
 export function initDigital() {
@@ -156,6 +159,7 @@ export function initDigital() {
     routePts.push(new THREE.Vector3(x, height(x, z) + 0.12, z))
   }
   const curve = new THREE.CatmullRomCurve3(routePts)
+  const routeSpan = routePts[0].z - routePts[routePts.length - 1].z
   const tubeGeo = new THREE.TubeGeometry(curve, 400, 0.045, 6, false)
   const tubeMat = new THREE.MeshBasicMaterial({ color: RED, transparent: true, opacity: 0.95 })
   const tube = new THREE.Mesh(tubeGeo, tubeMat)
@@ -177,6 +181,7 @@ export function initDigital() {
   const clock = new THREE.Clock()
   const look = new THREE.Vector3()
   const tmp = new THREE.Vector3()
+  const chase = new THREE.Vector3()
 
   ScrollTrigger.create({
     trigger: section,
@@ -228,18 +233,29 @@ export function initDigital() {
     pointsMat.uniforms.uWarm.value = smooth(0.35, 0.6, p) * 0.6
     wireMat.opacity = smooth(0.3, 0.55, p) * 0.28
 
-    const route = smooth(0.4, 0.95, p)
+    // The route's red dot leads the camera a fixed distance down the valley,
+    // so it stays in frame instead of falling behind the flight.
+    const fly = smooth(0.12, 1, p)
+    const cz = cameraZ(p)
+    const follow = smooth(0.38, 0.5, p)
+    const route = Math.min(1, Math.max(0, (routePts[0].z - (cz - ROUTE_LEAD)) / routeSpan)) * follow
     tubeGeo.setDrawRange(0, Math.floor((tubeIndexCount * route) / 3) * 3)
     curve.getPointAt(Math.max(0.001, route), head.position)
     head.visible = route > 0.001
     glow.material.opacity = 0.6 + Math.sin(t * 4) * 0.2
 
-    // Camera: hover in the flakes, then rise and travel down the valley.
-    const fly = smooth(0.12, 1, p)
-    const cz = cameraZ(p)
+    // Camera: hover in the flakes, then rise and chase the dot down the valley.
     const cx = valleyX(cz) * 0.6
-    camera.position.set(cx + Math.sin(t * 0.3) * 0.15, 2.2 + fly * 3.6, cz)
+    camera.position.set(
+      cx + (head.position.x - cx) * follow * 0.85 + Math.sin(t * 0.3) * 0.15,
+      2.2 + fly * (mobile ? 3 : 3.6),
+      cz,
+    )
     tmp.set(valleyX(cz - 10) * 0.8, 0.2 + fly * 0.4, cz - 10)
+    if (follow > 0) {
+      chase.set(head.position.x, head.position.y, head.position.z - 2)
+      tmp.lerp(chase, follow)
+    }
     look.lerp(tmp, 0.08)
     camera.lookAt(look)
 

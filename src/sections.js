@@ -31,10 +31,12 @@ export function initSections() {
     ease: 'power3.out',
     scrollTrigger: { trigger: '.hobby-strip', start: 'top 75%' },
   })
-  gsap.fromTo('#elevation-path', { strokeDashoffset: 1 }, {
-    strokeDashoffset: 0,
+  // Revealed with a clip rather than stroke dashes: non-scaling-stroke makes
+  // browsers ignore pathLength, so a dash-offset draw shows the full line.
+  gsap.fromTo('.elevation', { clipPath: 'inset(-40px 100% -40px 0)' }, {
+    clipPath: 'inset(-40px 0% -40px 0)',
     ease: 'none',
-    scrollTrigger: { trigger: '.hobby-strip', start: 'top 70%', end: 'bottom 60%', scrub: 0.5 },
+    scrollTrigger: { trigger: '.hobby-strip', start: 'top 75%', end: 'bottom 75%', scrub: 0.4 },
   })
 
   // Process: red timeline fills as you scroll through the steps.
