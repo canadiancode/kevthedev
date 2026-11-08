@@ -44,6 +44,7 @@ export async function initFilm() {
           frames[i] = img
           loaded++
           loader.style.setProperty('--p', loaded / total)
+          dispatchEvent(new CustomEvent('film:progress', { detail: { loaded, total } }))
           if (Math.abs(i - current) < 32) draw(true)
         }
         resolve()

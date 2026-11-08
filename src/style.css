@@ -286,6 +286,139 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 }
 .film-loader.done { opacity: 0; }
 
+/* Loader: "Lights On" --------------------------------------------------- */
+.loader { --lx: 57%; --ly: 8%; cursor: progress; }
+.loader-veil {
+  --r: 34;
+  --in: 1;
+  /* A soft elliptical pool of light under the lamp. --in is how dark it is
+     inside the pool (1 = lamp off); --r grows it until the whole garage is lit. */
+  --pool: radial-gradient(
+    ellipse calc(var(--r) * 1vmax) calc(var(--r) * 1.45vmax) at var(--lx) var(--ly),
+    rgb(0 0 0 / var(--in)) 0%,
+    rgb(0 0 0 / var(--in)) 30%,
+    #000 100%
+  );
+  -webkit-mask-image: var(--pool);
+  mask-image: var(--pool);
+}
+.loader-glow {
+  position: absolute;
+  left: var(--lx);
+  top: var(--ly);
+  width: 30vmax;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 246 228 / 0.95),
+    rgb(255 205 150 / 0.42) 14%,
+    rgb(255 138 61 / 0.1) 42%,
+    transparent
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-grain {
+  position: absolute;
+  inset: -50%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  animation: grain 0.8s steps(5) infinite;
+  pointer-events: none;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -4%); }
+  75% { transform: translate(-1%, 3%); }
+  100% { transform: translate(3%, -1%); }
+}
+.loader-mark,
+.loader-coords,
+.loader-tag,
+.loader-count {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.loader.ready :is(.loader-mark, .loader-coords, .loader-tag, .loader-count) { opacity: 1; }
+.loader-mark {
+  /* Sits exactly where the nav logo lands. */
+  left: var(--gutter);
+  top: 18px;
+  font: 900 1.5rem/1 var(--display);
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+.loader-coords {
+  right: var(--gutter);
+  top: 22px;
+  margin: 0;
+  font: 500 0.66rem/1.6 var(--body);
+  letter-spacing: 0.2em;
+  text-align: right;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+.loader-tag {
+  left: var(--gutter);
+  bottom: calc(var(--gutter) + 14px);
+  margin: 0;
+  font: 600 0.72rem/1 var(--body);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--copper);
+}
+.loader-tag b { color: var(--red); margin-right: 0.8em; }
+.loader-count {
+  right: var(--gutter);
+  bottom: calc(var(--gutter) - 0.04em);
+  display: flex;
+  font: 900 clamp(4.5rem, 15vw, 12.5rem)/0.9 var(--display);
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+.loader-count .d { display: block; height: 0.9em; overflow: hidden; }
+.loader-count .d > span { display: block; will-change: transform; }
+.loader-count .d > span > span { display: block; height: 0.9em; text-align: center; }
+.loader-count .d:first-child { color: rgb(241 236 229 / 0.16); transition: color 0.4s; }
+.loader-count.full .d:first-child { color: var(--fg); }
+.loader-count sup {
+  align-self: flex-start;
+  margin: 0.55em 0 0 0.5em;
+  font: 600 0.72rem/1 var(--body);
+  letter-spacing: 0.22em;
+  color: var(--copper);
+}
+.loader-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgb(255 255 255 / 0.06);
+}
+.loader-line i {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  box-shadow: 0 0 12px var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+/* Mask each line top and bottom only; long words overflow the 10ch heading sideways. */
+.chapter-hero h1 .ln { display: block; clip-path: inset(0 -100vw); padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.chapter-hero h1 .ln > span { display: block; }
+
+@media (max-width: 720px) {
+  .loader-tag { bottom: calc(clamp(4.5rem, 15vw, 12.5rem) * 0.9 + var(--gutter) + 18px); right: var(--gutter); }
+}
+
 /* Digital terrain ------------------------------------------------------- */
 .digital {
   position: relative;
@@ -723,4 +856,5 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .scroll-hint span::after { animation: none; }
+  .loader-grain { animation: none; }
 }

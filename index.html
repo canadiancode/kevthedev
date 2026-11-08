@@ -96,8 +96,38 @@
     />
     <link rel="preload" as="image" href="/film/lg/0001.webp" media="(min-aspect-ratio: 1/1)" />
     <link rel="preload" as="image" href="/film/sm/0001.webp" media="(max-aspect-ratio: 1/1)" />
+    <script>
+      // "Lights On" intro (src/loader.js): once per browser session, only when landing at the top
+      // of the page. Add ?loader (or ?loader=slow to fake a slow connection) to force it.
+      ;(function () {
+        var forced = /[?&]loader\b/.test(location.search)
+        var seen = false
+        try {
+          seen = sessionStorage.getItem('kh-intro') === '1'
+          sessionStorage.setItem('kh-intro', '1')
+        } catch (e) {}
+        if (forced || (!seen && !location.hash)) document.documentElement.classList.add('is-loading')
+      })()
+    </script>
+    <style>
+      /* Paint the dark garage before any JS or CSS bundle arrives. */
+      .loader { display: none; }
+      .is-loading, .is-loading body { overflow: hidden; }
+      .is-loading .loader { display: block; position: fixed; inset: 0; z-index: 100; }
+      .is-loading .loader-veil { position: absolute; inset: 0; background: #0b0a09; }
+    </style>
   </head>
   <body>
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="loader-veil"></div>
+      <div class="loader-glow"></div>
+      <div class="loader-grain"></div>
+      <span class="loader-mark">K</span>
+      <p class="loader-coords">49.1913° N<br />122.8490° W</p>
+      <p class="loader-tag"><b>00</b>Warming up the garage</p>
+      <div class="loader-count"></div>
+      <div class="loader-line"><i></i></div>
+    </div>
     <header class="nav" id="nav">
       <a class="nav-logo" href="#top" aria-label="KevTheDev home">K</a>
       <nav class="nav-links" id="nav-links" aria-label="Sections">
