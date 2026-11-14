@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Run Your Own Local AI Model (No API Keys, No Bullshit) | KevTheDev</title>
+    <meta
+      name="description"
+      content="A copy-paste guide to running your own AI model on your own computer. One month of Claude or ChatGPT does the heavy lifting, safely. Then cancel it, and your local model keeps running."
+    />
+    <meta name="author" content="Kevin Heidema" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0b0a09" />
+    <link rel="canonical" href="https://kevthedev.site/instructions/local-models/" />
+    <meta property="og:site_name" content="KevTheDev" />
+    <meta property="og:url" content="https://kevthedev.site/instructions/local-models/" />
+    <meta property="og:title" content="Run your own AI. On your own damn computer." />
+    <meta property="og:description" content="Copy-paste prompts. No API keys. No terminal wizardry." />
+    <meta property="og:image" content="https://kevthedev.site/img/og.jpg" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=Caveat:wght@500&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="g-nav">
+      <a class="g-logo" href="/" aria-label="KevTheDev home">K</a>
+      <span class="g-crumb">Instructions <i>/</i> Local models</span>
+      <a class="g-back" href="/">Back to the garage <i>→</i></a>
+    </header>
+
+    <main>
+      <!-- Hero ---------------------------------------------------------- -->
+      <section class="g-hero">
+        <p class="eyebrow"><b>001</b>Field guide</p>
+        <h1>Run your own AI.<br />On your own <em>damn</em> computer.</h1>
+        <p class="g-lede">
+          No API keys. No terminal wizardry. No 47-tab YouTube rabbit hole. You copy my prompts, a smart AI does the
+          heavy lifting (and asks before it touches anything), and you end up with a model that runs on <em>your</em>
+          machine, offline, for free, forever.
+        </p>
+        <p class="g-scribble">yes, even if you think "terminal" is an airport thing</p>
+
+        <ol class="g-how">
+          <li>
+            <span>01</span>
+            <h3>Borrow a big brain</h3>
+            <p>One month of Claude or ChatGPT. It's the contractor. It does the setup so you don't have to.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>Paste my prompts</h3>
+            <p>Step by step. Each one has safety rules baked in, so the AI explains first and asks before it runs anything.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>Fire the contractor</h3>
+            <p>Cancel the subscription if you want. Your local model doesn't care. It lives on your computer now.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Step 01 -------------------------------------------------------- -->
+      <section class="g-step" id="step-1">
+        <header class="g-step-head">
+          <span class="g-step-num">01</span>
+          <div>
+            <p class="eyebrow">Step one</p>
+            <h2>Get yourself <em>a helper</em></h2>
+          </div>
+        </header>
+
+        <p>
+          First things first. You need an AI that can actually <em>do</em> stuff on your computer, not just chat about it.
+          Claude and ChatGPT both have desktop apps that can run commands, with your permission. So:
+        </p>
+
+        <div class="g-question" role="group" aria-labelledby="q1">
+          <p class="g-question-text" id="q1">Do you pay for Claude or ChatGPT?</p>
+          <div class="g-answers">
+            <button class="g-answer" type="button" data-answer="claude">Yep, Claude</button>
+            <button class="g-answer" type="button" data-answer="chatgpt">Yep, ChatGPT</button>
+            <button class="g-answer" type="button" data-answer="none">Nope, neither</button>
+          </div>
+        </div>
+
+        <!-- "Neither": pick a plan. Cheapest plan that includes the command-running agent. -->
+        <div class="g-panel" data-panel="none" hidden>
+          <h3>Cool, pick one. Cheapest plan works.</h3>
+          <p>
+            You don't need the fancy tier. The cheapest paid plan on either side includes the bit that runs commands.
+            Doesn't really matter which one you pick. They're both great at this.
+          </p>
+          <div class="g-plans">
+            <article class="g-plan">
+              <p class="g-plan-brand">Claude</p>
+              <h4>Pro</h4>
+              <p class="g-plan-price">$20<small>/mo</small></p>
+              <p class="g-plan-note">or about $17/mo if you pay for the year. Includes Claude Code in the desktop app.</p>
+              <!-- AFFILIATE: swap this href for an affiliate link if Anthropic launches a program (add rel="sponsored"). -->
+              <a class="pill" href="https://claude.com/pricing" target="_blank" rel="noopener" data-plan="claude">Get Claude Pro <i>→</i></a>
+            </article>
+            <article class="g-plan">
+              <p class="g-plan-brand">ChatGPT</p>
+              <h4>Plus</h4>
+              <p class="g-plan-price">$20<small>/mo</small></p>
+              <p class="g-plan-note">Includes Codex. The cheaper Go plan has Codex too, but with tighter limits.</p>
+              <!-- AFFILIATE: swap this href for an affiliate link if OpenAI launches a program (add rel="sponsored"). -->
+              <a class="pill" href="https://chatgpt.com/pricing" target="_blank" rel="noopener" data-plan="chatgpt">Get ChatGPT Plus <i>→</i></a>
+            </article>
+          </div>
+          <p class="g-small">
+            Prices are in USD and change whenever these companies feel like it. Check their pricing page before you
+            subscribe. Got it? Come back and hit the button for the one you picked.
+          </p>
+          <div class="g-answers">
+            <button class="g-answer" type="button" data-answer="claude">I got Claude</button>
+            <button class="g-answer" type="button" data-answer="chatgpt">I got ChatGPT</button>
+          </div>
+
+          <aside class="g-aside">
+            <p class="eyebrow">Really don't want to pay?</p>
+            <p>
+              Grab <a href="https://lmstudio.ai" target="_blank" rel="noopener">LM Studio</a>. It's free, you click
+              through it like any normal app, and it tells you which models fit your computer. You won't have an AI
+              doing the setup for you, and my prompts won't apply, but it gets the job done.
+            </p>
+          </aside>
+        </div>
+
+        <!-- Claude install -->
+        <div class="g-panel" data-panel="claude" hidden>
+          <h3>Set up Claude</h3>
+          <ol class="g-list">
+            <li>
+              Download the <a href="https://claude.com/download" target="_blank" rel="noopener">Claude desktop app</a>
+              and sign in.
+            </li>
+            <li>Click the <b>Code</b> tab at the top. Not the normal chat. The normal chat can't touch your computer.</li>
+            <li>Make a new, empty folder called <code>local-ai</code> (on your Desktop is fine) and pick it as the project folder.</li>
+            <li>
+              Leave permissions on the default, <b>Ask permissions</b>. Do <em>not</em> pick bypass or auto mode. We
+              want it asking before every command. That's the whole point.
+            </li>
+          </ol>
+        </div>
+
+        <!-- ChatGPT install -->
+        <div class="g-panel" data-panel="chatgpt" hidden>
+          <h3>Set up ChatGPT</h3>
+          <ol class="g-list">
+            <li>
+              Download the <a href="https://chatgpt.com/codex" target="_blank" rel="noopener">Codex app</a> and sign in
+              with your ChatGPT account.
+            </li>
+            <li>Make a new, empty folder called <code>local-ai</code> (on your Desktop is fine) and open it in Codex.</li>
+            <li>
+              Leave approvals on the default. Do <em>not</em> switch to full access. We want it asking before every
+              command. That's the whole point.
+            </li>
+          </ol>
+        </div>
+
+        <div class="g-check" data-check="1" hidden>
+          <span>✓</span>
+          <p>
+            <b>Checkpoint.</b> You've got an AI that can run commands on your computer, and it asks before it does
+            anything. Onward.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 02 -------------------------------------------------------- -->
+      <section class="g-step" id="step-2">
+        <header class="g-step-head">
+          <span class="g-step-num">02</span>
+          <div>
+            <p class="eyebrow">Step two</p>
+            <h2>What's under <em>the hood?</em></h2>
+          </div>
+        </header>
+
+        <p>
+          Before we download anything, we need to know what your computer can handle without crying. This step is
+          <b>look, don't touch</b>. The AI only reads info about your machine. It doesn't install or change a thing.
+        </p>
+
+        <div class="g-rule">
+          <h3>The one rule</h3>
+          <p>
+            The whole AI setup (the model, the engine running it, and its memory of your chat) has to fit in
+            <b>80% of your RAM</b>. The chat memory (called "context") gets <b>50% of the model's size</b>. Leaves
+            breathing room so your computer doesn't turn into a space heater.
+          </p>
+        </div>
+
+        <figure class="g-prompt">
+          <figcaption>
+            <span>Prompt 02 · Hardware check</span>
+            <button class="g-copy" type="button" data-copy="prompt-2">Copy prompt</button>
+          </figcaption>
+<pre id="prompt-2"><span class="g-slot">[SAFETY RULES: Kevin's security checks go here]</span>
+
+You're helping me set up an AI model that runs locally on this computer. This step is READ-ONLY. Look, don't touch.
+
+1. Find out my operating system, CPU or chip, total RAM, graphics card and its memory (VRAM) if I have one, and free disk space.
+2. Only use built-in, read-only commands. Don't install anything, don't change any settings, and never use sudo or admin.
+3. Before each command, tell me in plain English what it does, then wait for my OK.
+4. When you're done, give me this summary and nothing else:
+
+HARDWARE REPORT
+- OS:
+- Chip / CPU:
+- Total RAM (GB):
+- Graphics card + VRAM (GB), or "shared memory" on Apple chips:
+- Free disk space (GB):
+- Memory budget (80% of RAM, or of VRAM on a PC with a graphics card):
+- Max model size, (budget - 1 GB) / 1.5:</pre>
+        </figure>
+
+        <div class="g-calc">
+          <div class="g-calc-head">
+            <h3>Or just do the math right here</h3>
+            <p>How much RAM have you got? (Mac: Apple menu → About This Mac. Windows: Settings → System → About.)</p>
+          </div>
+          <div class="g-ram" role="radiogroup" aria-label="RAM in GB">
+            <button type="button" data-ram="8">8 GB</button>
+            <button type="button" data-ram="16" aria-checked="true">16 GB</button>
+            <button type="button" data-ram="24">24 GB</button>
+            <button type="button" data-ram="32">32 GB</button>
+            <button type="button" data-ram="48">48 GB</button>
+            <button type="button" data-ram="64">64 GB</button>
+            <button type="button" data-ram="128">128 GB</button>
+          </div>
+          <dl class="g-calc-out" aria-live="polite">
+            <div><dt>AI budget (80%)</dt><dd data-out="budget">12.8 GB</dd></div>
+            <div><dt>Engine</dt><dd data-out="runtime">1 GB</dd></div>
+            <div><dt>Max model</dt><dd data-out="model">7.9 GB</dd></div>
+            <div><dt>Context (50%)</dt><dd data-out="context">3.9 GB</dd></div>
+          </dl>
+          <p class="g-calc-verdict" data-out="verdict"></p>
+          <p class="g-small">
+            Rough guide, not gospel. On a PC with a separate graphics card, use its VRAM instead of RAM if you want
+            things fast. Close Chrome's 80 tabs while it runs. You know who you are.
+          </p>
+        </div>
+
+        <div class="g-check">
+          <span>✓</span>
+          <p>
+            <b>Checkpoint.</b> You've got a Hardware Report with your max model size. Keep that chat open, because
+            the next step builds on it.
+          </p>
+        </div>
+      </section>
+
+      <!-- Coming soon ---------------------------------------------------- -->
+      <section class="g-step g-soon">
+        <header class="g-step-head">
+          <span class="g-step-num">03+</span>
+          <div>
+            <p class="eyebrow">Still cooking</p>
+            <h2>The rest is <em>in the garage</em></h2>
+          </div>
+        </header>
+        <p>I'm still writing these up. Check back soon, or follow along on Instagram while I break stuff.</p>
+        <ul class="g-soon-list">
+          <li><span>03</span>Pick a model that actually fits</li>
+          <li><span>04</span>Install the engine (Ollama)</li>
+          <li><span>05</span>Download it and fire it up</li>
+          <li><span>06</span>Kick the tires and check the memory</li>
+          <li><span>07</span>How to rip it all out later</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="g-foot">
+      <p>
+        Made by <a href="/">KevTheDev</a> in BC. Not affiliated with Anthropic, OpenAI or anyone else mentioned here.
+        You're running stuff on your own computer, so read what the AI tells you before you hit OK.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/guide/local-models.js"></script>
+  </body>
+</html>
