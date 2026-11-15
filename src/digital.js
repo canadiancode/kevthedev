@@ -54,6 +54,11 @@ const ROUTE_LEAD = 6
 
 const LABEL_AT = [0.5, 0.6, 0.7]
 
+// The timeline above was laid out for a 320vh pin. The section now pins for
+// 250vh and stops just after the last label is in, so the camera is still
+// moving as About scrolls up instead of drifting through dead scroll.
+const TAIL = 250 / 320
+
 export function initDigital() {
   const section = document.getElementById('digital')
   const canvas = document.getElementById('digital-canvas')
@@ -205,14 +210,14 @@ export function initDigital() {
   ScrollTrigger.create({
     trigger: section,
     start: 'top top',
-    end: 'bottom bottom',
+    end: () => `bottom top+=${stage.offsetHeight}`,
     scrub: 0.5,
-    onUpdate: (self) => (progress = self.progress),
+    onUpdate: (self) => (progress = self.progress * TAIL),
   })
 
   function resize() {
-    const w = innerWidth
-    const h = innerHeight
+    const w = stage.clientWidth
+    const h = stage.clientHeight
     renderer.setSize(w, h, false)
     camera.aspect = w / h
     camera.updateProjectionMatrix()

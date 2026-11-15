@@ -20,6 +20,7 @@ export async function initFilm() {
   const hint = document.getElementById('scroll-hint')
   const endFade = [document.getElementById('film-shade'), document.getElementById('route'), document.getElementById('film-ui')]
   const handoff = document.getElementById('digital-from')
+  const stage = section.querySelector('.film-stage')
 
   const meta = await fetch('/film/meta.json').then((r) => r.json())
   const total = meta.frames
@@ -85,9 +86,12 @@ export async function initFilm() {
   }
 
   function resize() {
+    // Size to the stage (100svh), not innerHeight: in-app browsers such as
+    // Instagram's report different values for the two, which stretched the
+    // canvas so its last frame didn't line up with the terrain's copy of it.
     const dpr = Math.min(devicePixelRatio || 1, 2)
-    canvas.width = Math.round(innerWidth * dpr)
-    canvas.height = Math.round(innerHeight * dpr)
+    canvas.width = Math.round(stage.clientWidth * dpr)
+    canvas.height = Math.round(stage.clientHeight * dpr)
     draw(true)
   }
 
@@ -133,7 +137,11 @@ export async function initFilm() {
     scrollTrigger: {
       trigger: section,
       start: 'top top',
-      end: 'bottom bottom',
+      // Finish exactly where the sticky stage lets go and the terrain section
+      // locks in, i.e. stage height from the top. 'bottom bottom' uses
+      // innerHeight, which differs from 100svh in in-app browsers (Instagram),
+      // so the terrain appeared before the film had finished.
+      end: () => `bottom top+=${stage.offsetHeight}`,
       scrub: 0.6,
       onUpdate: (self) => updateOverlays(self.progress),
     },

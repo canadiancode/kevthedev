@@ -423,7 +423,9 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 .digital {
   position: relative;
   z-index: 2;
-  height: 420vh;
+  /* 250vh of pinned scroll: ends just after the last peak label lands, so
+     there's no dead scroll before About (see TAIL in digital.js). */
+  height: 350vh;
   /* Start on top of the film's last screen so the handoff has no seam. */
   margin-top: -100vh;
   margin-top: -100svh;
