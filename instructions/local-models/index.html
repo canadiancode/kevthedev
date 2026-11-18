@@ -102,7 +102,7 @@
           <p>Say no and close the app if:</p>
           <ul class="g-list">
             <li>The AI asks for your computer password in the chat.</li>
-            <li>A password box pops up out of nowhere. (Two are normal: Ollama's first launch on a Mac, and the Node.js installer in step 9.)</li>
+            <li>A password box pops up out of nowhere. (A couple are normal, listed below.)</li>
             <li>A command says <code>sudo</code> or "admin". (Linux installs are the only exception, and the AI warns you first.)</li>
             <li>It wants to touch stuff outside your <code>local-ai</code> folder that the step didn't mention.</li>
             <li>It downloads from anywhere but ollama.com, github.com or huggingface.co (plus nodejs.org and npmjs.com in step 9).</li>
@@ -111,12 +111,14 @@
         </aside>
         <aside class="g-aside">
           <p class="eyebrow">Pop-ups that are fine</p>
-          <p>
-            Not every box is a stop sign. These are normal: a Mac asking "this was downloaded from the Internet,
-            are you sure you want to open it?" (it says that about every app). The two password boxes mentioned
-            above. Claude or ChatGPT asking to use your Desktop folder in step 8. Your browser asking for the
-            microphone in step 9. The one to stop at is "can't be verified" or "unknown developer".
-          </p>
+          <p>Not every box is a stop sign. These are normal:</p>
+          <ul class="g-list">
+            <li>Your Mac asking "downloaded from the Internet, are you sure?" It says that about every app.</li>
+            <li>A password box the first time Ollama opens on a Mac, or from the Node.js installer in step 9.</li>
+            <li>Claude or ChatGPT asking to use your Desktop folder in step 8.</li>
+            <li>Your browser asking for the microphone in step 9.</li>
+          </ul>
+          <p>The one to stop at: "can't be verified" or "unknown developer".</p>
         </aside>
       </section>
 
