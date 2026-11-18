@@ -41,14 +41,6 @@ code {
   border-radius: 6px;
   padding: 0.1em 0.4em;
 }
-kbd {
-  font: 600 0.82em var(--body);
-  background: var(--bg-3);
-  border: 1px solid var(--line);
-  border-bottom-width: 2px;
-  border-radius: 5px;
-  padding: 0.05em 0.45em;
-}
 
 h1, h2, h3, h4 {
   font-family: var(--display);
