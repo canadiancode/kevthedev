@@ -400,6 +400,9 @@ main { padding: 0 var(--gutter); }
 }
 .g-do h3 { margin-bottom: 0.5em; }
 .g-do > li > p { margin-bottom: 0.6em; }
+.g-shot { margin: 16px 0 18px; }
+.g-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.g-shot figcaption { margin-top: 0.6em; font-size: 0.9em; color: var(--muted); }
 .g-prompt-sm { margin: 12px 0; }
 .g-prompt-sm pre { padding: 14px 16px; }
 
