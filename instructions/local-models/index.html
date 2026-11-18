@@ -134,6 +134,7 @@
           <ul class="g-list">
             <li>Your Mac asking "downloaded from the Internet, are you sure?" It says that about every app.</li>
             <li>A password box the first time Ollama opens on a Mac, or from the Node.js installer in step 9.</li>
+            <li>Ollama's "Create an account" box. Click <b>No thanks, I'll use Ollama locally</b>. Never Sign up.</li>
             <li>Claude or ChatGPT asking to use your Desktop folder in step 8.</li>
             <li>A small Terminal window when you double-click Start My AI or Stop My AI. It shows the update check, then you can close it.</li>
             <li>Your browser asking for the microphone in step 9.</li>
@@ -678,7 +679,7 @@ FOR THIS STEP
    - the .ollama folder in my home folder (~/.ollama), including server.json
    - my shell startup files (like ~/.zshrc, ~/.zprofile, ~/.bash_profile), only to look for OLLAMA_ settings
    - launchctl getenv on a Mac, or my environment variables on Windows, only to look for OLLAMA_ settings
-4. Ollama does not need an account. If anything asks for one, stop. Password exception: on a Mac, Ollama may ask for my computer password the first time it opens, to add its command-line tool. That's expected. Warn me before it happens. I type it into my computer's own box myself, never into this chat.
+4. Ollama does not need an account. Never sign up or sign in. Ollama's own "Create an account" box is expected: I click "No thanks, I'll use Ollama locally" (item 21). If anything else asks for an account, stop. Password exception: on a Mac, Ollama may ask for my computer password the first time it opens, to add its command-line tool. That's expected. Warn me before it happens. I type it into my computer's own box myself, never into this chat.
 
 PART 1: CHECK AND SAVE THE PLAN
 5. Before saving anything, check every download source and command in the plan. They may only point to ollama.com (including docs.ollama.com), github.com/ollama, api.github.com/repos/ollama or huggingface.co (hf.co), and the plan mustn't ask you to run any other commands. This rule is for downloads and commands only: links the plan cites as reading sources (CVE write-ups, nvd.nist.gov, blogs) are fine as notes, and you don't need to open them. Its "How to verify the installer" line may describe checks: treat that as notes only, and use the checks in Part 4. If a download source or command points anywhere else, stop and show me.
@@ -711,6 +712,7 @@ PART 4: INSTALL IT SAFELY
 21. Before I open it on a Mac, warn me about these, in plain words:
     - It offers to install its command-line tool. I say yes. That's the expected password box, typed into my computer's box, not this chat.
     - Its welcome window says to type "ollama" in a terminal. I don't need to. I just close that window. If I typed it anyway and a menu shows up offering to install other software (like "Launch OpenClaw (install)"), I press Ctrl+C. Never Enter.
+    - A "Create an account" box may pop up (it offers faster, larger cloud models). I click "No thanks, I'll use Ollama locally", never "Sign up". That's not a reason to stop: just tell me to click No thanks and carry on.
     - The llama icon's menu in the menu bar shows a "ChatGPT / Not installed" switch. Leave it off.
     - On newer MacBooks the llama icon can hide behind the camera notch. Quitting a few apps makes room.
 22. Tell me I can delete the installer file afterwards.
@@ -787,6 +789,13 @@ MY MODEL PLAN:
             <p>
               Typed it anyway and got a menu offering to install other software? The cursor starts on "Launch
               OpenClaw (install)", so Enter installs it. <b>Press Ctrl+C. Never press Enter there.</b>
+            </p>
+          </li>
+          <li>
+            <h3>Say no to the account</h3>
+            <p>
+              A "Create an account" box may pop up, offering "faster, larger open models". Those run on Ollama's
+              computers, not yours. Click <b>No thanks, I'll use Ollama locally</b>. Never Sign up.
             </p>
           </li>
           <li>
