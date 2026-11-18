@@ -344,7 +344,7 @@ HOW WE WORK (same in every step)
 - If this chat gets long, save what's done to PROGRESS and tell me to start a new chat with this same prompt. When you start, skip the parts PROGRESS says are done.
 - When this step is done, update PROGRESS, give me the report, and stop. Don't start the next step. Tell me to open a new chat for it.
 
-You're helping me set up an AI model that runs locally on this computer. This step is READ-ONLY. Look, don't touch.
+You're helping me set up an AI model that runs locally on this computer. This step is READ-ONLY. Look, don't touch. Don't create any files, not even MODEL-PLAN.md. That gets made in step 4, so there's no PROGRESS to update yet.
 
 1. Find out my operating system, CPU or chip, total RAM, graphics card and its memory (VRAM) if I have one, and free disk space. Say whether it's a separate graphics card or integrated graphics that share my RAM.
 2. Only use built-in, read-only commands. Don't install anything and don't change any settings.
@@ -367,7 +367,7 @@ HARDWARE REPORT
           <span>✓</span>
           <p>
             <b>Checkpoint.</b> You've got a Hardware Report with your max model size. Copy it (the whole HARDWARE
-            REPORT block). You'll paste it into the next step.
+            REPORT block) and keep it somewhere safe, like a note. You'll paste it into the next step, in a new chat.
           </p>
         </div>
       </section>
@@ -557,14 +557,15 @@ MY HARDWARE REPORT:
           <p>
             <b>Checkpoint.</b> You've got a MODEL PLAN: which abliterated model, who made it, its file fingerprint (SHA-256), which version of Ollama, and the sources it checked.
             Read the "couldn't verify" line. If anything there makes you nervous, ask the AI about it before moving on.
-            Then copy the whole MODEL PLAN block and open a new chat in your Code tab or Codex, same <code>local-ai</code> folder.
+            Then copy the whole MODEL PLAN block, keep a copy somewhere safe, and open a new chat in your Code tab or Codex, same <code>local-ai</code> folder.
           </p>
         </div>
         <aside class="g-aside">
-          <p class="eyebrow">From here on: new chat, every step</p>
+          <p class="eyebrow">New chat, every step</p>
           <p>
-            Start a fresh chat for each step from step 4 on. Same app, same <code>local-ai</code> folder, and check
-            the permission setting still says what you picked in step 1. Everything the AI needs is saved in
+            Keep doing what you did for steps 2 and 3: a fresh chat for every step. From step 4 on it's always the
+            Code tab or Codex, same <code>local-ai</code> folder, and check the permission setting still says what
+            you picked in step 1. The "New chat" box above each prompt tells you exactly what to paste. Everything the AI needs is saved in
             <code>MODEL-PLAN.md</code>, including a list of which steps are done, so it loses nothing. A long chat
             slowly forgets its safety rules. A fresh one has them right at the top.
           </p>
@@ -1067,7 +1068,7 @@ TEST REPORT
           </li>
           <li>
             <h3>Tell your setup helper how it went</h3>
-            <p>Back in Claude or ChatGPT, paste this so it gets written down in your plan:</p>
+            <p>Open a new chat in your setup helper and paste this, so it gets written down in your plan:</p>
             <div class="g-handoff">
               <p class="g-handoff-tag">New chat</p>
               <dl>
