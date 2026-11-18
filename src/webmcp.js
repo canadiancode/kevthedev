@@ -7,7 +7,7 @@ import { sendMessage } from './contact.js'
 const text = (el) => el?.textContent.replace(/\s+/g, ' ').trim() ?? ''
 const json = (value) => JSON.stringify(value, null, 2)
 
-const SECTIONS = ['top', 'about', 'services', 'resources', 'work', 'hobbies', 'process', 'contact']
+const SECTIONS = ['top', 'about', 'resources', 'services', 'work', 'hobbies', 'process', 'contact']
 
 function profile() {
   return {
