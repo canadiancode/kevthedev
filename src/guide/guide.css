@@ -41,6 +41,14 @@ code {
   border-radius: 6px;
   padding: 0.1em 0.4em;
 }
+kbd {
+  font: 600 0.82em var(--body);
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.05em 0.45em;
+}
 
 h1, h2, h3, h4 {
   font-family: var(--display);
@@ -222,6 +230,34 @@ main { padding: 0 var(--gutter); }
 }
 .g-aside .eyebrow { color: var(--dim); margin-bottom: 0.8em; }
 .g-aside p:last-child { margin: 0; font-size: 0.92rem; }
+
+/* "New chat" box above every prompt: where to paste it and what to bring from the last chat */
+.g-handoff {
+  margin: 28px 0 12px;
+  padding: 16px 18px;
+  border: 1px dashed rgb(210 154 108 / 0.45);
+  border-radius: 12px;
+  background: rgb(210 154 108 / 0.05);
+}
+.g-handoff-tag {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--copper);
+  color: var(--bg);
+  font: 700 0.68rem/1 var(--body);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.g-handoff dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0; font-size: 0.92rem; }
+.g-handoff dt { color: var(--dim); }
+.g-handoff dd { margin: 0; color: var(--fg); }
+.g-where-inline b { font-weight: 600; }
+@media (max-width: 560px) {
+  .g-handoff dl { grid-template-columns: 1fr; gap: 2px; }
+  .g-handoff dd { margin-bottom: 8px; }
+}
 
 .g-check {
   display: flex;
