@@ -131,6 +131,7 @@
             <li>Your Mac asking "downloaded from the Internet, are you sure?" It says that about every app.</li>
             <li>A password box the first time Ollama opens on a Mac, or from the Node.js installer in step 9.</li>
             <li>Claude or ChatGPT asking to use your Desktop folder in step 8.</li>
+            <li>A small Terminal window when you double-click Start My AI or Stop My AI. It shows the update check, then you can close it.</li>
             <li>Your browser asking for the microphone in step 9.</li>
             <li>A Mac asking if one app can "control" Ollama or Finder in step 8 or 10, but only if the AI told you it was coming.</li>
           </ul>
@@ -1180,55 +1181,57 @@ Read MODEL-PLAN.md and HOW-TO-USE.md in this project folder. Build me two small 
 
 FOR THIS STEP
 1. Outside the project folder: only the "My Local AI" folder on my desktop in Part 5. Show me what you'll create first.
+2. I chat in the Ollama app, never in a terminal. The scripts open and quit the Ollama app the normal way. They never start Ollama's server themselves (no ollama serve) and never open a chat in a terminal (no ollama run).
+3. If the Ollama app isn't installed the normal way (Applications on Mac, its installer on Windows), stop and tell me to redo step 4. Don't work around it.
 
 PART 1: RESEARCH FIRST (LIVE, NOT FROM MEMORY)
-2. Look up, on official sources only, how to check from a script:
+4. Look up, on official sources only, how to check from a script:
    - the latest stable Ollama release (GitHub releases for ollama/ollama)
    - Ollama's published security advisories (GitHub security advisories for ollama/ollama)
    - the current file list and SHA-256 hashes of my model's Hugging Face repo
-3. Look up Ollama's official, built-in way to update itself on my operating system. Start My AI will point me to that, not do it.
-4. Tell me what you found, with links, before writing anything.
+5. Look up Ollama's official, built-in way to update itself on my operating system. Start My AI will point me to that, not do it.
+6. Tell me what you found, with links, before writing anything.
 
 PART 2: WHAT START MY AI DOES
-5. If it already checked today, skip the checks and just open the Ollama app.
-6. Check the installed Ollama version (ollama --version) against the latest stable release.
-7. The version check above is the one that matters: being behind the latest release always counts as "update now". As a bonus, check Ollama's GitHub security advisories and flag any that affect my installed version. That list is usually empty, so never report an empty list as "no security problems".
-8. Check my model's GGUF file on Hugging Face. If its SHA-256 no longer matches the one in MODEL-PLAN.md, or the repo is gone, flag it.
-9. Show the results in plain English, for example:
+7. If it already checked today, skip the checks and just open the Ollama app.
+8. Check the installed Ollama version (ollama --version) against the latest stable release.
+9. The version check above is the one that matters: being behind the latest release always counts as "update now". As a bonus, check Ollama's GitHub security advisories and flag any that affect my installed version. That list is usually empty, so never report an empty list as "no security problems".
+10. Check my model's GGUF file on Hugging Face. If its SHA-256 no longer matches the one in MODEL-PLAN.md, or the repo is gone, flag it.
+11. Show the results in plain English, for example:
     - "No updates found. You're on the latest Ollama."
     - "Ollama has an update (you have X, latest is Y). Here's how to update it: ..."
     - "SECURITY FIX: Ollama X has a known security hole. Update before using it: ..."
     - "Your model's publisher changed their file online. The copy on your computer is not affected and still works. You don't need to do anything. Never re-download it without the Update Me prompt."
     - "WARNING: your model's page has been removed from Hugging Face. That can mean a problem was found. Run the Update Me prompt with your setup AI before using it again."
     - "Couldn't check (no internet). Will try again next time."
-10. Then open the Ollama app.
-11. Save the date and result of each check to update-log.txt in this folder.
+12. Then open the Ollama app, the same way as double-clicking it, and end with "All set. You can close this window." (Double-clicking a script shows a small terminal window with these messages. That's expected.)
+13. Save the date and result of each check to update-log.txt in this folder.
 
 PART 3: RULES FOR START MY AI
-12. It must never download, install, update or delete anything. It only reads and reports.
-13. It only connects to api.github.com and huggingface.co, over HTTPS. Nothing else.
-14. It sends no information about me or my computer (no IDs, no tracking, no version numbers), only plain requests for public info. Those two sites will see my IP address, like any website I visit. Say so in HOW-TO-USE.md.
-15. It never runs anything it downloads. It reads the replies as data only.
-16. If it can't connect or something unexpected comes back, it says so and still opens the Ollama app. It never blocks me from my AI.
-17. Keep it short and readable, with plain-English comments so I can see what every part does.
-18. It must work without admin rights and without changing any security settings.
-19. Add a test mode that pretends my Ollama version is old, so we can see the "update available" message without waiting for a real update.
+14. It must never download, install, update or delete anything. It only reads and reports.
+15. It only connects to api.github.com and huggingface.co, over HTTPS. Nothing else.
+16. It sends no information about me or my computer (no IDs, no tracking, no version numbers), only plain requests for public info. Those two sites will see my IP address, like any website I visit. Say so in HOW-TO-USE.md.
+17. It never runs anything it downloads. It reads the replies as data only.
+18. If it can't connect or something unexpected comes back, it says so and still opens the Ollama app. It never blocks me from my AI.
+19. Keep it short and readable, with plain-English comments so I can see what every part does.
+20. It must work without admin rights and without changing any security settings.
+21. Add a test mode that pretends my Ollama version is old, so we can see the "update available" message without waiting for a real update.
 
 PART 4: WHAT STOP MY AI DOES
-20. Unload every model that's loaded (ollama ps, then ollama stop for each one).
-21. Quit the Ollama app and its background server, the normal way. No admin rights, and only Ollama, nothing else. On a Mac, prefer a way that doesn't make my computer ask whether one app may "control" another. If that box can't be avoided, tell me it's coming before we test.
-22. Check it worked: no Ollama process running and nothing on port 11434. Then say "Your AI is off. Memory freed." or exactly what's still running.
-23. It never deletes anything and never connects to the internet.
+22. Unload every model that's loaded (ollama ps, then ollama stop for each one).
+23. Quit the Ollama app and its background server, the normal way. No admin rights, and only Ollama, nothing else. On a Mac, prefer a way that doesn't make my computer ask whether one app may "control" another. If that box can't be avoided, tell me it's coming before we test.
+24. Check it worked: no Ollama process running and nothing on port 11434. Then say "Your AI is off. Memory freed." or exactly what's still running.
+25. It never deletes anything and never connects to the internet.
 
 PART 5: BUILD IT
-24. Write both scripts for my operating system: double-clickable .command files on Mac, .cmd files on Windows, .sh files on Linux. On Windows, if a script needs PowerShell, call it inline (powershell -NoProfile -Command). Never use -ExecutionPolicy Bypass and never change the execution policy. Show me each full script and walk me through it before saving.
-25. Save them in this project folder with exactly these names: "Start My AI" and "Stop My AI", plus the extension for my system (for example "Start My AI.command" on Mac).
-26. Create a folder on my desktop called "My Local AI" with three shortcuts in it: "Start My AI", "Stop My AI", and "Everything" (opens this project folder). Shortcuts only, the real files stay here.
-27. Test the shortcuts in the desktop folder, not the files here: Start normally, Start in test mode, then Stop. After Stop, run ollama ps and show me nothing is loaded.
-28. Update HOW-TO-USE.md: "Open your AI with Start My AI and close it with Stop My AI, both in the My Local AI folder on your desktop. Closing the chat window doesn't free the memory right away. Stop does." Add what each update message means and what to do about it.
-29. Add an ON/OFF SWITCH section to MODEL-PLAN.md: where the scripts and desktop folder are, what Start checks, and today's date.
-30. Ollama normally starts by itself when my computer starts. That keeps it running in the background and skips Start My AI's daily check. Tell me how to turn that off myself (Ollama's own setting, or my computer's list of start-up apps) and ask if I want to. Don't change it for me.
-31. Look up Ollama's official uninstall steps for my operating system (ollama.com or github.com/ollama/ollama, live, not from memory). Write UNINSTALL.md in this folder: plain-English steps I can follow by hand, with no AI, to remove everything this project put on my computer, and a note about anything the INSTALL LOG says was here before (leave that alone). Don't run any of it.
+26. Write both scripts for my operating system: double-clickable .command files on Mac, .cmd files on Windows, .sh files on Linux. On Windows, if a script needs PowerShell, call it inline (powershell -NoProfile -Command). Never use -ExecutionPolicy Bypass and never change the execution policy. Show me each full script and walk me through it before saving.
+27. Save them in this project folder with exactly these names: "Start My AI" and "Stop My AI", plus the extension for my system (for example "Start My AI.command" on Mac).
+28. Create a folder on my desktop called "My Local AI" with three shortcuts in it: "Start My AI", "Stop My AI", and "Everything" (opens this project folder). Shortcuts only, the real files stay here.
+29. You run the tests, not me: open the shortcuts in the desktop folder from your side (for example with the open command on a Mac). Start normally, Start in test mode, then Stop. After Stop, show me nothing is loaded and port 11434 is free. Don't ask me to type or press keys in terminal windows. At the very end, ask me to double-click Start My AI once myself, to see it work.
+30. Update HOW-TO-USE.md: "Open your AI with Start My AI and close it with Stop My AI, both in the My Local AI folder on your desktop. Closing the chat window doesn't free the memory right away. Stop does." Add what each update message means and what to do about it.
+31. Add an ON/OFF SWITCH section to MODEL-PLAN.md: where the scripts and desktop folder are, what Start checks, and today's date.
+32. Ollama normally starts by itself when my computer starts. That keeps it running in the background and skips Start My AI's daily check. Tell me how to turn that off myself (Ollama's own setting, or my computer's list of start-up apps) and ask if I want to. Don't change it for me.
+33. Look up Ollama's official uninstall steps for my operating system (ollama.com or github.com/ollama/ollama, live, not from memory). Write UNINSTALL.md in this folder: plain-English steps I can follow by hand, with no AI, to remove everything this project put on my computer, and a note about anything the INSTALL LOG says was here before (leave that alone). Don't run any of it.
 
 When you're done, give me this and wait for my OK:
 
