@@ -2,13 +2,17 @@
 
 > Kevin Heidema is a Shopify developer and AI automation specialist based in Surrey, BC, Canada. He builds Shopify stores, Hydrogen storefronts and custom Shopify apps, plus AI automation: agentic workflows, automated social content engines, and AI-ready websites (WebMCP, structured data, llms.txt).
 
-The site is a single page at https://kevthedev.site/. It exposes WebMCP tools (`get_profile`, `get_services`, `get_work`, `show_section`, `contact_kevin`) through `document.modelContext` / `navigator.modelContext` in supporting browsers.
+The main site is a single page at https://kevthedev.site/, plus free guides under /instructions/. It exposes WebMCP tools (`get_profile`, `get_services`, `get_resources`, `get_work`, `show_section`, `contact_kevin`) through `document.modelContext` / `navigator.modelContext` in supporting browsers.
 
 ## Services
 
 - Shopify development: store setup, Hydrogen / headless storefronts, custom Shopify apps, speed and performance, migration to Shopify (from WooCommerce, Squarespace and others)
 - AI solutions: AI automation and agentic workflows, social content engine (generates, schedules and posts on-brand content), AI-ready websites (WebMCP, structured data, llms.txt)
 - Integrations and support: third-party apps, CRMs and fulfillment systems; ongoing maintenance and support
+
+## Resources
+
+- [Run your own AI on your own computer](https://kevthedev.site/instructions/local-models/): free step-by-step guide to running an abliterated (uncensored) open model offline with Ollama. Claude or ChatGPT does the setup using copy-paste prompts with safety checks built in.
 
 ## Work
 

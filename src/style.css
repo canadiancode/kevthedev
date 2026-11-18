@@ -612,6 +612,28 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
 .work-nda p:last-child { margin-bottom: 0; }
 .work-nda .pill { flex: none; }
 
+/* Resources: free guides (/instructions now, /skills later). Same card language as Work. */
+.res-grid { display: grid; gap: 18px; margin-top: 40px; }
+.res-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: radial-gradient(120% 160% at 100% 0%, rgb(229 50 45 / 0.12), transparent 60%), var(--bg-2);
+  text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.res-card:hover { border-color: rgb(255 255 255 / 0.3); transform: translateY(-4px); }
+.res-card > div { max-width: 640px; }
+.res-card h3 { font-size: 1.6rem; }
+.res-card .tags { margin-bottom: 0; }
+.res-card .pill { flex: none; }
+.res-card:hover .pill { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.res-card:hover .pill i { transform: translateX(3px); }
+
 .hobbies { grid-template-columns: minmax(130px, 1fr) 5fr; padding-bottom: clamp(60px, 8vw, 110px); }
 .hobby-strip {
   position: relative;
@@ -838,6 +860,7 @@ p { margin: 0 0 1em; max-width: 58ch; color: var(--muted); }
   .script { position: relative; right: auto; bottom: auto; justify-self: end; margin-top: 12px; font-size: 1.3rem; }
   .work-grid { grid-template-columns: 1fr; }
   .work-nda { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .res-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
   .hobby-strip {
     grid-template-columns: 1fr;
     height: auto;

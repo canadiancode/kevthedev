@@ -1,0 +1,8 @@
+# Cloudflare Pages response headers.
+# The guide pages hand people prompts to paste into an AI that can run commands,
+# so they get a strict policy: only this site's own scripts, no framing, no plugins.
+/instructions/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin

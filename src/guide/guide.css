@@ -188,6 +188,18 @@ main { padding: 0 var(--gutter); }
 
 .g-list { margin: 0; padding-left: 1.3em; color: var(--muted); }
 .g-list li { margin-bottom: 0.7em; padding-left: 0.3em; }
+.g-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.22em;
+  vertical-align: -0.4em;
+  margin: 0 0.1em;
+  color: var(--fg);
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
 .g-list li::marker { color: var(--copper); font-weight: 700; }
 
 .g-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
@@ -223,7 +235,7 @@ main { padding: 0 var(--gutter); }
 .g-check span { color: var(--green); font-weight: 800; font-size: 1.2rem; line-height: 1.4; }
 .g-check p { margin: 0; }
 
-/* Rule + prompt + calculator ------------------------------------------- */
+/* Rule + prompt ------------------------------------------- */
 .g-rule {
   margin: 24px 0;
   padding: 22px 24px;
@@ -248,6 +260,20 @@ main { padding: 0 var(--gutter); }
   text-transform: uppercase;
   color: var(--dim);
 }
+.g-prompt figcaption { flex-wrap: wrap; justify-content: flex-start; }
+.g-prompt figcaption .g-copy { margin-left: auto; }
+.g-where {
+  font: 500 0.72rem/1 var(--body);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--copper);
+  padding: 0.5em 0.8em;
+  border-radius: 999px;
+  border: 1px solid rgb(210 154 108 / 0.4);
+  background: rgb(210 154 108 / 0.08);
+}
+.g-where b { font-weight: 600; color: var(--fg); }
+.g-where.is-local { color: var(--green); border-color: rgb(127 209 139 / 0.4); background: rgb(127 209 139 / 0.08); }
 .g-copy {
   font: 600 0.72rem/1 var(--body);
   letter-spacing: 0.08em;
@@ -279,40 +305,90 @@ main { padding: 0 var(--gutter); }
   padding: 0.1em 0.5em;
 }
 
-.g-calc { margin: 28px 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: var(--bg-2); }
-.g-calc-head p { font-size: 0.92rem; }
-.g-ram { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 22px; }
-.g-ram button {
-  font: 600 0.85rem/1 var(--body);
-  color: var(--muted);
+
+/* Collapsible prompt: first ~14 lines, fade, then a toggle. */
+.g-prompt.is-collapsible { position: relative; }
+.g-prompt.is-collapsible pre { max-height: 22em; overflow: hidden; }
+.g-prompt.is-collapsible:not(.is-open) pre {
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
+}
+.g-prompt.is-open pre { max-height: none; }
+.g-expand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-top: 1px solid var(--line);
   background: var(--bg-3);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.75em 1em;
+  color: var(--copper);
+  font: 600 0.75rem/1 var(--body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   cursor: pointer;
 }
-.g-ram button:hover { color: var(--fg); border-color: var(--dim); }
-.g-ram button[aria-checked='true'] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.g-calc-out { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 0 18px; }
-.g-calc-out div { padding: 14px; border-radius: 12px; background: var(--bg-3); border: 1px solid var(--line); }
-.g-calc-out dt { font: 600 0.65rem/1.2 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
-.g-calc-out dd { margin: 0; font: 800 1.5rem/1 var(--display); color: var(--fg); }
-.g-calc-out div:nth-child(3) { border-color: var(--copper); }
-.g-calc-out div:nth-child(3) dd { color: var(--copper); }
-.g-calc-verdict { color: var(--fg); }
+.g-expand:hover { color: var(--amber); }
+.g-expand i { font-style: normal; transition: transform 0.25s; }
+.g-prompt.is-open .g-expand i { transform: rotate(180deg); }
 
-/* Coming soon ---------------------------------------------------------- */
-.g-soon-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
-.g-soon-list li {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 18px;
-  border: 1px dashed var(--line);
-  border-radius: 12px;
-  color: var(--dim);
+.g-badges { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.g-badges li {
+  font: 500 0.8rem/1 var(--body);
+  color: var(--fg);
+  padding: 0.6em 0.9em 0.6em 0.75em;
+  border-radius: 999px;
+  border: 1px solid rgb(127 209 139 / 0.3);
+  background: rgb(127 209 139 / 0.06);
 }
-.g-soon-list span { font: 800 0.85rem/1 var(--display); color: var(--copper); opacity: 0.6; }
+.g-badges li::before { content: '✓'; color: var(--green); font-weight: 700; margin-right: 0.45em; }
+
+/* Hands-on step list (things the reader does themselves) */
+.g-do { list-style: none; padding: 0; margin: 28px 0 0; counter-reset: do; }
+.g-do > li {
+  counter-increment: do;
+  position: relative;
+  padding: 0 0 28px 58px;
+  border-left: 1px solid var(--line);
+  margin-left: 18px;
+}
+.g-do > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.g-do > li::before {
+  content: counter(do);
+  position: absolute;
+  left: -18px;
+  top: -4px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--copper);
+  color: var(--bg);
+  font: 800 1rem/1 var(--display);
+}
+.g-do h3 { margin-bottom: 0.5em; }
+.g-do > li > p { margin-bottom: 0.6em; }
+.g-prompt-sm { margin: 12px 0; }
+.g-prompt-sm pre { padding: 14px 16px; }
+
+.g-subhead { margin: 56px 0 14px; }
+.g-subhead .eyebrow { margin-bottom: 0.7em; }
+.g-subhead h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+.g-when li { margin-bottom: 0.9em; }
+
+/* Finish line ---------------------------------------------------------- */
+.g-finish {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 96px 0 88px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.g-finish p:not(.eyebrow) { max-width: 52ch; margin: 0 auto 2em; }
+.g-finish h2 { font-size: clamp(2.2rem, 6vw, 4rem); }
 
 .g-foot { max-width: var(--col); margin: 0 auto; padding: 40px var(--gutter) 64px; border-top: 1px solid var(--line); }
 .g-foot p { font-size: 0.82rem; color: var(--dim); }
@@ -320,8 +396,7 @@ main { padding: 0 var(--gutter); }
 @media (max-width: 720px) {
   .g-crumb { display: none; }
   .g-how, .g-plans { grid-template-columns: 1fr; }
-  .g-calc-out { grid-template-columns: 1fr 1fr; }
-  .g-question, .g-panel, .g-calc { padding: 20px; }
+  .g-question, .g-panel { padding: 20px; }
   .g-step-head { flex-direction: column; gap: 6px; }
 }
 

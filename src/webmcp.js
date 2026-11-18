@@ -7,7 +7,7 @@ import { sendMessage } from './contact.js'
 const text = (el) => el?.textContent.replace(/\s+/g, ' ').trim() ?? ''
 const json = (value) => JSON.stringify(value, null, 2)
 
-const SECTIONS = ['top', 'about', 'services', 'work', 'hobbies', 'process', 'contact']
+const SECTIONS = ['top', 'about', 'services', 'resources', 'work', 'hobbies', 'process', 'contact']
 
 function profile() {
   return {
@@ -47,6 +47,15 @@ function work() {
   return { projects, note: text(document.querySelector('.work-nda p:not(.eyebrow)')) }
 }
 
+function resources() {
+  return [...document.querySelectorAll('#resources a.res-card')].map((card) => ({
+    title: text(card.querySelector('h3')),
+    url: card.href,
+    type: text(card.querySelector('.eyebrow')).replace(/^\d+\s*/, ''),
+    description: text(card.querySelector('h3 + p')),
+  }))
+}
+
 const tools = [
   {
     name: 'get_profile',
@@ -71,6 +80,14 @@ const tools = [
     inputSchema: { type: 'object', properties: {} },
     annotations: { readOnlyHint: true },
     execute: async () => json(work()),
+  },
+  {
+    name: 'get_resources',
+    title: 'Free resources',
+    description: "Kevin's free guides and resources (for example, step-by-step instructions for running an AI model locally), with links.",
+    inputSchema: { type: 'object', properties: {} },
+    annotations: { readOnlyHint: true },
+    execute: async () => json(resources()),
   },
   {
     name: 'show_section',
