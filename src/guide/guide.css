@@ -211,6 +211,7 @@ main { padding: 0 var(--gutter); }
 .g-plan-note { font-size: 0.9rem; min-height: 4.2em; }
 
 .g-small { font-size: 0.85rem; color: var(--dim); }
+.g-hero .g-small { margin: -1.2em 0 2.6em; max-width: 62ch; }
 
 .g-aside {
   margin-top: 28px;
