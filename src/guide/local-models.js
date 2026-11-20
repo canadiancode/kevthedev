@@ -45,6 +45,49 @@ try {
   if (saved) choose(saved, false)
 } catch (e) {}
 
+/* Mac or Windows: the whole page (and every prompt) follows this pick ------- */
+// The HTML ships with data-os="mac" so Mac readers never see a flash. On first
+// visit we guess from the browser, after that we remember the reader's pick.
+
+const osButtons = document.querySelectorAll('[data-os-pick]')
+const OS_NAME = { mac: 'Mac', win: 'Windows' }
+
+function pickOS(os, save = true) {
+  if (!OS_NAME[os]) os = 'mac'
+  document.documentElement.dataset.os = os
+  osButtons.forEach((b) => b.setAttribute('aria-checked', String(b.dataset.osPick === os)))
+  document.querySelectorAll('[data-os-label]').forEach((el) => (el.textContent = OS_NAME[os]))
+  if (save) {
+    try {
+      localStorage.setItem('kh-guide-os', os)
+    } catch (e) {}
+  }
+}
+
+function guessOS() {
+  const p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent
+  return /win/i.test(p) ? 'win' : 'mac'
+}
+
+osButtons.forEach((b) => b.addEventListener('click', () => pickOS(b.dataset.osPick)))
+
+// Arrow keys move between the two options, like normal radio buttons.
+document.querySelectorAll('[role="radiogroup"][data-os-group]').forEach((group) => {
+  group.addEventListener('keydown', (e) => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return
+    e.preventDefault()
+    const next = document.documentElement.dataset.os === 'mac' ? 'win' : 'mac'
+    pickOS(next)
+    group.querySelector(`[data-os-pick="${next}"]`).focus()
+  })
+})
+
+let savedOS = null
+try {
+  savedOS = localStorage.getItem('kh-guide-os')
+} catch (e) {}
+pickOS(savedOS || guessOS(), false)
+
 /* Back links: return to the exact page (and scroll spot) people came from ---- */
 // Came from somewhere on this site? Go back in history so the home page restores where they were.
 // Came from Instagram, Google or a fresh tab? The plain href="/" takes them to the home page.
@@ -96,3 +139,12 @@ document.querySelectorAll('.g-prompt.is-collapsible').forEach((fig) => {
     if (!open) fig.scrollIntoView({ block: 'nearest' })
   })
 })
+
+/* Demo videos loop on their own, unless the reader asked for less motion ------ */
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.g-shot video[autoplay]').forEach((v) => {
+    v.removeAttribute('autoplay')
+    v.pause()
+  })
+}

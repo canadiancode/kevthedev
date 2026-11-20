@@ -401,7 +401,8 @@ main { padding: 0 var(--gutter); }
 .g-do h3 { margin-bottom: 0.5em; }
 .g-do > li > p { margin-bottom: 0.6em; }
 .g-shot { margin: 16px 0 18px; }
-.g-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.g-shot img, .g-shot video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.g-shot video { background: #fff; }
 .g-shot figcaption { margin-top: 0.6em; font-size: 0.9em; color: var(--muted); }
 .g-prompt-sm { margin: 12px 0; }
 .g-prompt-sm pre { padding: 14px 16px; }
@@ -435,4 +436,93 @@ main { padding: 0 var(--gutter); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .g-panel { animation: none; }
+}
+
+/* Mac / Windows picker --------------------------------------------------- */
+/* <html data-os="mac|win"> decides which version of each OS-specific bit shows.
+   .os-mac / .os-win work on any element, including spans inside prompts, so
+   the copy button (innerText) only copies the version you're looking at. */
+html[data-os='mac'] .os-win,
+html[data-os='win'] .os-mac { display: none !important; }
+
+.g-os .g-os-lede { max-width: 60ch; }
+.g-os-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 26px 0 16px;
+}
+.g-os-tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
+  column-gap: 16px;
+  align-items: center;
+  text-align: left;
+  padding: 22px 22px 20px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: var(--bg-2);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.g-os-tab:hover { border-color: rgb(210 154 108 / 0.6); transform: translateY(-1px); }
+.g-os-tab:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+.g-os-icon { grid-row: 1 / 3; width: 44px; height: 44px; color: var(--dim); }
+.g-os-icon svg { width: 100%; height: 100%; }
+.g-os-name { font: 900 clamp(1.5rem, 4vw, 2.1rem)/1 var(--display); text-transform: uppercase; letter-spacing: -0.01em; }
+.g-os-sub { font-size: 0.85rem; color: var(--dim); }
+.g-os-state {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 16px;
+  padding: 0.5em 0.9em;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font: 600 0.68rem/1 var(--body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.g-os-state::before { content: 'Pick this'; }
+.g-os-tab[aria-checked='true'] {
+  border-color: var(--copper);
+  background: linear-gradient(135deg, rgb(210 154 108 / 0.22), rgb(210 154 108 / 0.06) 70%), var(--bg-2);
+  box-shadow: 0 0 0 4px rgb(210 154 108 / 0.12);
+}
+.g-os-tab[aria-checked='true'] .g-os-icon { color: var(--copper); }
+.g-os-tab[aria-checked='true'] .g-os-state { background: var(--copper); border-color: var(--copper); color: var(--bg); }
+.g-os-tab[aria-checked='true'] .g-os-state::before { content: '✓ Selected'; }
+.g-os-note { margin: 0; }
+
+/* Small always-visible switch in the top bar */
+.g-nav-os {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-2);
+}
+.g-nav-os button {
+  font: 600 0.68rem/1 var(--body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7em 1em;
+  cursor: pointer;
+}
+.g-nav-os button[aria-checked='true'] { background: var(--copper); color: var(--bg); }
+.g-nav-os button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.g-nav .g-nav-os { margin-left: auto; }
+.g-nav .g-nav-os + .g-back { margin-left: 0; }
+
+@media (max-width: 560px) {
+  .g-os-tabs { grid-template-columns: 1fr; }
+  .g-back { display: none; }
 }
