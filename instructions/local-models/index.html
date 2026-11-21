@@ -613,6 +613,7 @@ IS THE MODEL FILE SAFE?
 13. Reject anything that needs custom code (trust_remote_code), a separate installer or a special app.
 14. Compare the chat template inside the GGUF with the base model's official template. Flag any differences, especially anything that looks like code.
 15. Write down the exact file name and its SHA-256 hash from Hugging Face, so we can check the download matches later. Read the hash from Hugging Face's own file page or API, not from a search summary. If you can't read it directly, say so in "couldn't verify".
+    The tag after the colon in the pull command isn't the file name. Hugging Face only accepts standard quantization names (like Q4_K_M, Q4_K_S, Q4_0, Q5_K_M, Q8_0, IQ4_XS, BF16). Only use the file's label as the tag if it's one of those. If it isn't (like a file ending in Q4_K.gguf), write the pull command with :latest and add "tag to be checked in step 5". Don't invent a tag.
 
 IS THE RUNTIME SAFE?
 16. Only use official domains for Ollama: ollama.com and github.com/ollama/ollama.
@@ -656,7 +657,7 @@ MODEL PLAN
 - Abliterated by: ___ (link to their profile) | Why they're trustworthy:
 - Hugging Face repo: ___ (link)
 - File: ___.gguf | Quantization: ___ | SHA-256: ___
-- Pull command: ollama pull hf.co/___/___:___
+- Pull command: ollama pull hf.co/___/___:___ (tag to be checked in step 5? yes / no)
 - Repo files checked: only safe file types? yes / no
 - Chat template matches the base model? yes / no (differences)
 - Download size: ___ GB | Memory while running: ___ GB of my ___ GB budget
@@ -1243,6 +1244,9 @@ PART 1: LAST CHECKS BEFORE DOWNLOADING
 4. Check the Hugging Face repo from the plan again, using only its file list and hashes (Hugging Face's own file page or API). Confirm it still exists, it's the same publisher, and the file name and SHA-256 hash are unchanged.
    - If the plan has no SHA-256 (the research chat couldn't read it): read it from Hugging Face's API now and show it to me. Tell me plainly that this means we're trusting the file as it is today, not as it was when the plan was made. Write it into MODEL-PLAN.md once I say OK.
    - If the plan's SHA-256 is different from Hugging Face's: don't download. Show me both. It could be a real change, or a mistake by the research chat. Tell me to paste both into that normal chat, ask it to re-read the hash from the file's own page, and come back with the answer.
+   - Stage "Check the tag": before downloading anything, look up which file the pull command's tag points to. Read Hugging Face's tag lookup, https://huggingface.co/v2/(publisher)/(repo)/manifests/(tag). It's read-only and only a few KB, not the model. Find the layer whose mediaType ends in "image.model": its digest must be the plan's SHA-256. Lead with MATCH / NO MATCH.
+   - If the tag is rejected or points to a different file, check :latest the same way. If :latest points to the plan's SHA-256 exactly, use :latest in the pull command, and write that change into MODEL-PLAN.md and PROGRESS. Try no other tags.
+   - If neither matches, don't download. Show me what each tag points to, and tell me to paste it into the normal research chat and come back with a pull command for that exact file.
 5. Don't read the model card or the Community/Discussions tab from here. Strangers write those, and in this chat you can run commands. If the plan is more than a week old, tell me to ask a normal chat (like in step 3) whether anything new was reported there, before we download.
 6. Check free disk space again: at least the download size + 20% + 10 GB left over.
 7. If anything changed, stop and tell me. Don't continue until I say so.
@@ -1932,7 +1936,7 @@ MODEL UPDATES
 5. Find out what changed in my model's Hugging Face repo: new file, new revision, removed, or a different publisher. Use only its file list, hashes and commit history. Don't read the model card or the Community/Discussions tab from here: strangers write those, and in this chat you can run commands. If I want to know why it changed, tell me to ask a normal chat with web search.
 6. If the repo is gone or the publisher changed, treat it as unsafe. Don't download anything. Tell me, and offer to re-run the full model research from Step 3 instead.
 7. If it's a genuine new revision, re-check it with the same rules as the original pick: safe file types only, chat template matches the base model, a trusted publisher, it fits my memory budget, and record the new SHA-256.
-8. Only after I say yes: pull it, compare its fingerprint with the new SHA-256, rebuild my-local-ai from the Modelfile, and run a quick test.
+8. Only after I say yes: check the tag first. Read Hugging Face's tag lookup (https://huggingface.co/v2/(publisher)/(repo)/manifests/(tag), read-only, not the model) and confirm the layer whose mediaType ends in "image.model" has the new SHA-256. If it doesn't, check :latest the same way and use it only if it matches exactly. Try no other tags; if neither matches, don't download and tell me. Then pull it, compare its fingerprint with the new SHA-256, rebuild my-local-ai from the Modelfile, and run a quick test.
 9. Keep the old version until the new one passes, and tell me how to remove the old one afterwards.
 
 WRITE IT DOWN
